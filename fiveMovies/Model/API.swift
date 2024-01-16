@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+//API 통신

@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+//전역으로 관리되는 데이터 생성

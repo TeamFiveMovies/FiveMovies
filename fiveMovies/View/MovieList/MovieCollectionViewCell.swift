@@ -12,15 +12,37 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var movieImage: UIImageView!
     
-    var movie: Movie?
+    var movie: MovieData.Movie?
     
-    func setCell(_ _movie: Movie) {
+    func setCell(_ _movie: MovieData.Movie) {
         movie = _movie
         
-        self.movieName.text = _movie.name
+        self.movieName.text = _movie.title
         self.movieName.sizeToFit()
-        self.movieImage.image = UIImage(named: _movie.image)
         
+        if let posterPath = movie?.posterPath {
+            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
+        }
+    }
+    
+    private func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.movieImage.image = UIImage(data: data)
+            }
+        }
+        
+        task.resume()
     }
     
 }
+    
+

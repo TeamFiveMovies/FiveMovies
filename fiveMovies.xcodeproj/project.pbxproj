@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0A232A12B564AE900544F2A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F464FE2B560092001A2DC0 /* Data.swift */; };
 		E0F464EA2B55FFEC001A2DC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F464E92B55FFEC001A2DC0 /* AppDelegate.swift */; };
 		E0F464EC2B55FFEC001A2DC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F464EB2B55FFEC001A2DC0 /* SceneDelegate.swift */; };
 		E0F464EE2B55FFEC001A2DC0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F464ED2B55FFEC001A2DC0 /* LogInViewController.swift */; };
 		E0F464F12B55FFEC001A2DC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F464EF2B55FFEC001A2DC0 /* Main.storyboard */; };
 		E0F464F32B55FFED001A2DC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F464F22B55FFED001A2DC0 /* Assets.xcassets */; };
 		E0F464F62B55FFED001A2DC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F464F42B55FFED001A2DC0 /* LaunchScreen.storyboard */; };
-		E0F464FF2B560092001A2DC0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F464FE2B560092001A2DC0 /* Data.swift */; };
 		E0F465012B5600BB001A2DC0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F465002B5600BB001A2DC0 /* API.swift */; };
 		E0F4650B2B560356001A2DC0 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F4650A2B560356001A2DC0 /* MovieListViewController.swift */; };
 		E0F4650D2B560373001A2DC0 /* MovieListStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F4650C2B560373001A2DC0 /* MovieListStoryboard.storyboard */; };
@@ -281,9 +281,9 @@
 				E0F464EC2B55FFEC001A2DC0 /* SceneDelegate.swift in Sources */,
 				E0F465242B561128001A2DC0 /* SelectSeatViewController.swift in Sources */,
 				E0F4650B2B560356001A2DC0 /* MovieListViewController.swift in Sources */,
+				E0A232A12B564AE900544F2A /* Data.swift in Sources */,
 				E0F4651E2B560DB0001A2DC0 /* MovieDetailViewController.swift in Sources */,
 				E0F465202B560FDE001A2DC0 /* MovieBookingViewController.swift in Sources */,
-				E0F464FF2B560092001A2DC0 /* Data.swift in Sources */,
 				E0F465012B5600BB001A2DC0 /* API.swift in Sources */,
 				E0F465162B560B2C001A2DC0 /* MovieSearchViewController.swift in Sources */,
 			);
@@ -444,6 +444,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,6 +472,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

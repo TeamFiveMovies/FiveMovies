@@ -47,6 +47,13 @@ class SelectSeatViewController: UIViewController {
         print(#function)
     }
 
+    @IBAction func confirmBtnTap(_ sender: Any) {
+        self.dismiss(animated: true) {
+            // let userDefaults = UserDefaults.standard
+        }
+    }
+
+
     func updateSeatUI() {
         for (index, seat) in seats.enumerated() {
             let button = view.viewWithTag(index) as? UIButton   // 좌석 버튼을 태그로부터 가져옴

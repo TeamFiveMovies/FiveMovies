@@ -16,13 +16,9 @@ class SelectSeatViewController: UIViewController {
         super.viewDidLoad()
 
         // 좌석 정보 초기화
-        seats = [
-            Seat(isAvailable: true, isSelected: false),
-            Seat(isAvailable: false, isSelected: false),
-        ]
+        seats = Array(repeating: Seat(isAvailable: true, isSelected: false), count: 20)
 
-        // 좌석에 대한 초기 UI 설정
-        updateSeatUI()
+        updateSeatUI()                  // 좌석에 대한 초기 UI 설정
     }
 
     @IBAction func selectPeople(_ sender: UIButton) {
@@ -34,7 +30,15 @@ class SelectSeatViewController: UIViewController {
     }
 
     @IBAction func seatTapped(_ sender: UIButton) {
+        guard selectedPeople?.isSelected == true else {
+            showAlert(message: "인원 수를 먼저 선택해주세요.")
+            return
+        }
+
         let seatIndex = sender.tag
+
+        print("Button tapped with tag: \(seatIndex)")
+
         let selectedSeat = seats[seatIndex]
 
         if selectedSeat.isAvailable {
@@ -54,6 +58,8 @@ class SelectSeatViewController: UIViewController {
     }
 
 
+
+    
     func updateSeatUI() {
         for (index, seat) in seats.enumerated() {
             let button = view.viewWithTag(index) as? UIButton   // 좌석 버튼을 태그로부터 가져옴
@@ -62,4 +68,11 @@ class SelectSeatViewController: UIViewController {
         }
     }
 
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
 }
+
+

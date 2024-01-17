@@ -16,13 +16,13 @@ class SelectSeatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 좌석 배열 초기화
-        seats = Array(repeating: Seat(isAvailable: true, isSelected: false), count: 20)
-
-        updateSeatUI()                  // 좌석에 대한 초기 UI 설정
+        seats = Array(repeating: Seat(isAvailable: true, isSelected: false), count: 20) // 좌석 배열 초기화
+        updateSeatUI()
     }
 
+    // 인원 수
     @IBAction func selectPeople(_ sender: UIButton) {
+        print("selectPeople called for index: \(sender.tag)")
         deselectAllSeats()
         selectedPeople?.isSelected = false      // 전에 선택된 버튼 해제
         sender.isSelected = true                // 현재 눌린 버튼 표시
@@ -31,11 +31,8 @@ class SelectSeatViewController: UIViewController {
         updateSeatUI()
     }
 
+    // 좌석
     @IBAction func seatTapped(_ sender: UIButton) {
-        //        guard selectedPeople?.isSelected == true else {
-        //            showAlert(message: "인원 수를 먼저 선택해주세요.")
-        //            return
-        //        }
         guard let selectedPeopleTag = selectedPeople?.tag else {
             showAlert(message: "인원 수를 먼저 선택해주세요.")
             return
@@ -47,15 +44,29 @@ class SelectSeatViewController: UIViewController {
 
         if selectedSeat.isAvailable {
             seats[seatIndex].isSelected.toggle()    // 선택 가능한 좌석 상태 토글
+
+            // 선택된 자리 인덱스 업데이트
+            if seats[seatIndex].isSelected {
+                selectedSeatIndex.append(seatIndex) // 현재 좌석이 선택되었을 경우, 배열에 해당 인덱스 추가
+            } else {
+                if let indexToRemove = selectedSeatIndex.firstIndex(of: seatIndex) {    // 현재 좌석이 해제되었을 경우
+                    selectedSeatIndex.remove(at: indexToRemove)                         // 배열에서 해당 인덱스 찾아서 제거
+                }
+            }
+
             updateSeatUI()
-        } else {
-            // 선택 불가능한 좌석에 대한 처리
+        } else { // 선택 불가능한 좌석에 대한 처리
+
         }
 
         print(#function)
     }
 
+    // 확인
     @IBAction func confirmBtnTap(_ sender: Any) {
+        if let selectedPeopleTag = selectedPeople?.tag {
+            print("선택된 인원 수: \(selectedPeopleTag)")
+        }
         print("선택된 자리: \(selectedSeatIndex)")
 
         self.dismiss(animated: true) {
@@ -64,11 +75,12 @@ class SelectSeatViewController: UIViewController {
     }
 
 
+    // 좌석 업데이트
     func updateSeatUI() {
-        for (index, _) in seats.enumerated() {                       // enumerated: 배열의 각 요소와 해당 요소의 인덱스 제공
-            let button = view.viewWithTag(index) as? UIButton        // 좌석 버튼을 태그로부터 가져옴
-
-            button?.isEnabled = selectedPeople?.isSelected ?? false  // 인원 버튼 상태에 따라 좌석 버튼 활성화
+        for (index, seat) in seats.enumerated() {
+            let seatBtn = view.viewWithTag(index) as? UIButton        // 좌석 버튼을 태그로부터 가져옴
+            seatBtn?.isEnabled = selectedPeople?.isSelected ?? false  // 인원 버튼 상태에 따라 좌석 버튼 활성화
+            print("Seat \(index) - isSelected: \(seat.isSelected)")
         }
     }
 
@@ -78,6 +90,8 @@ class SelectSeatViewController: UIViewController {
             seats[index].isSelected = false
         }
         selectedSeatIndex.removeAll()
+        updateSeatUI()
+        print("deselectAllSeats called")
     }
 
     func showAlert(message: String) {

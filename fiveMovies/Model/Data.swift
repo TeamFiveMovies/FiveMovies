@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: 무비 데이터
 class MovieData{
     
     //싱글톤 패턴 적용
@@ -14,7 +15,7 @@ class MovieData{
     private init() {}
     
     //상위 계층
-    public struct Result: Codable {
+    private struct Result: Codable {
         let results: [Movie]
     }
     
@@ -44,6 +45,7 @@ class MovieData{
     }
 }
 
+//MARK: 무비 데이터 세팅을 위한 API 통신
 extension MovieData {
     
     private func getNowPlayingMovies () {
@@ -194,3 +196,43 @@ extension MovieData {
     }
     
 }
+
+//MARK: 좌석 데이터
+class seatData {
+    
+    static let shared = seatData()
+    private init () {}
+    
+    public struct Seat: Codable {
+        var isAvailable: Bool   // 좌석 사용 가능한지
+        var isSelected: Bool    // 좌석이 선택되었는지
+    }
+    
+    public var seats: [Seat] = []
+    
+    //UserDefaults 키
+    private let seatKey = "seat"
+    
+    //UserDefaults 저장, 불러오기 메서드
+    
+    public func saveSeats() {
+        do {
+            let seatData = try JSONEncoder().encode(seats)
+            UserDefaults.standard.set(seatData, forKey: seatKey)
+            print ("좌석 데이터 세이브 성공")
+        } catch {
+            print ("좌석 데이터 세이브 실패")
+        }
+    }
+    public func loadSeats() {
+        do {
+            if let seatData = UserDefaults.standard.data(forKey: seatKey) {
+                seats = try JSONDecoder().decode([Seat].self, from: seatData)
+            }
+            print ("좌석 데이터 로드 성공")
+        } catch {
+            print ("좌석 데이터 로드 실패")
+        }
+    }
+}
+

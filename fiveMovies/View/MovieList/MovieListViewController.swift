@@ -17,10 +17,17 @@ class MovieListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        MovieData.shared.setData()
+        MovieData.shared.setData(complitionHandler: { [weak self] in
+            self?.displayCollectionView = MovieData.shared.nowPlayingMovies
+            DispatchQueue.main.async {
+                self?.movieCollectionView.reloadData()
+            }
+        })
+        let flowLayout = UICollectionViewFlowLayout()
+        movieCollectionView.collectionViewLayout = flowLayout
         movieCollectionView.dataSource = self
         movieCollectionView.delegate = self
-        // Do any additional setup after loading the view.
+        
     }
     
     
@@ -62,20 +69,3 @@ class MovieListViewController: UIViewController {
         self.present(MyPageViewController, animated: true)
     }
 }
-
-//// 더미데이터
-//struct Movie {
-//    let name: String
-//    let image: String
-//}
-//
-//extension Movie {
-//    static var boxoffice: [Movie] = [
-//        Movie(name: "킹콩", image: "kingkong"),
-//        Movie(name: "스타워즈", image: "starwars")
-//    ]
-//    static var upComing: [Movie] = [
-//    ]
-//    static var popularChart: [Movie] = [
-//    ]
-//}

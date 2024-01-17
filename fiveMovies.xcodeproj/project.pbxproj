@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BA5DD182B569472000F62EB /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DD172B569472000F62EB /* UserData.swift */; };
 		6B131ACD2B5673CE0074AEAA /* MovieCollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B131ACC2B5673CE0074AEAA /* MovieCollectionViewExtension.swift */; };
 		6B131ACF2B5676750074AEAA /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B131ACE2B5676750074AEAA /* MovieCollectionViewCell.swift */; };
 		7CC7A9B62B562E54008259FD /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC7A9B52B562E54008259FD /* Seat.swift */; };
@@ -36,7 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0BA5DD172B569472000F62EB /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		6B131ACC2B5673CE0074AEAA /* MovieCollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewExtension.swift; sourceTree = "<group>"; };
 		6B131ACE2B5676750074AEAA /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CC7A9B52B562E54008259FD /* Seat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				E0F4650F2B5608F2001A2DC0 /* RegisterViewController.swift */,
-				0BA5DD172B569472000F62EB /* UserData.swift */,
 				E0F465112B560902001A2DC0 /* RegisterStoryboard.storyboard */,
 			);
 			path = Register;
@@ -298,7 +295,6 @@
 				E0F464EE2B55FFEC001A2DC0 /* LogInViewController.swift in Sources */,
 				E0F465182B560D20001A2DC0 /* MyPageViewController.swift in Sources */,
 				E0F464EA2B55FFEC001A2DC0 /* AppDelegate.swift in Sources */,
-				0BA5DD182B569472000F62EB /* UserData.swift in Sources */,
 				E0F465102B5608F2001A2DC0 /* RegisterViewController.swift in Sources */,
 				E0F464EC2B55FFEC001A2DC0 /* SceneDelegate.swift in Sources */,
 				E0F465242B561128001A2DC0 /* SelectSeatViewController.swift in Sources */,

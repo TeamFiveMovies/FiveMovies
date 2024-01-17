@@ -8,6 +8,9 @@
 import UIKit
 
 class MyPageViewController: UIViewController {
+    
+    @IBOutlet weak var userID: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

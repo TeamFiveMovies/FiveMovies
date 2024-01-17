@@ -14,31 +14,33 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordCheck: UITextField!
     @IBOutlet weak var birthDate: UIDatePicker!
     
-    var userDataList: [UserData] = []
+    var userModel = UserModel()
+    
+    
+    
     let userDataKey = "User"
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        userDataList = readUserList()
-        print("\(userDataList)")
+        print("\(readUserList())")
     }
     
     @IBAction func confirmBtnTap(_ sender: UIButton) {
+        var userData = userModel.userDataList
         
         //UserDefaults에 회원정보 저장
-        let newUser = UserData(id: registerID.text!, password: registerPassword.text!, birth: birthDate.date)
+        let newUser = UserModel.UserData(id: registerID.text!, password: registerPassword.text!, passwordCheck: passwordCheck.text!, birth: dataFormat(date: birthDate.date))
         
         
-        if dateChecking(userData: newUser) {
-            
+        if registerChecking(userData: newUser){
             let alert = UIAlertController(title: "회원가입 가능합니다", message: "설명", preferredStyle: .alert)
             let addAction = UIAlertAction(title: "가입하기", style: .default){_ in
-                
-                self.addUserList(userInfo: newUser)
-                print("\(self.userDataList)")
-                print("\(self.readUserList())")
+                userData.append(newUser)
+                print("\(userData)")
+                self.addUserList(userInfo: userData)
+
                 self.dismiss(animated: true)
             }
 
@@ -46,7 +48,6 @@ class RegisterViewController: UIViewController {
             alert.addAction(addAction)
             alert.addAction(cancelAction)
             present(alert, animated: true, completion: nil)
-            
         }else {
             let alert = UIAlertController(title: "회원가입 형식을 지켜주세요", message: "설명", preferredStyle: .alert)
 
@@ -62,49 +63,41 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController {
     // 유저 정보 추가
-    func addUserList(userInfo: UserData) {
-        userDataList.append(userInfo)
-        
-        print("\(userDataList)")
-        
+    func addUserList(userInfo: [UserModel.UserData]) {
         guard let encodedData = try? JSONEncoder().encode(userInfo) else { return }
         UserDefaults.standard.set(encodedData, forKey: userDataKey)
-
-        
     }
     
     // 전체 유저 정보 조회
-    func readUserList() -> [UserData]{
+    func readUserList() -> [UserModel.UserData]{
        guard let userListData = UserDefaults.standard.data(forKey: userDataKey),
-             let decodedData = try? JSONDecoder().decode([UserData].self, from: userListData)
+             let decodedData = try? JSONDecoder().decode([UserModel.UserData].self, from: userListData)
        else {
-           print("왜들어갈까?")
            return [] }
-        
-        userDataList = decodedData
         
         return decodedData
     }
     
-
-    
-    func dateChecking(userData: UserData) -> Bool {
-        // 아이디, 비밀번호 빈칸 체크
-        if userData.id  == ""{
-            
-            return false
-        }
-        if userData.password == "" {
+    func registerChecking(userData: UserModel.UserData) -> Bool {
+        if userData.id == "" || userData.password == ""
+            || userData.password != userData.passwordCheck{
             return false
         }
         
-        // 아이디 중복 체크
-        for user in userDataList {
-            if user.id == userData.id{
+        for i in readUserList() {
+            if i.id == userData.id {
+                print("\(i)")
                 return false
             }
         }
-        
         return true
+    }
+    
+    func dataFormat(date: Date) -> String {
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy / MM / dd"
+        
+        return formatter.string(from: date)
     }
 }

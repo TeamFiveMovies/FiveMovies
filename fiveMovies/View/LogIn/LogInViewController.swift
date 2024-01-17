@@ -8,10 +8,14 @@
 import UIKit
 
 class LogInViewController: UIViewController {
+    
+    @IBOutlet weak var userID: UITextField!
+    @IBOutlet weak var userPasswork: UITextField!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
 
     @IBAction func logInBtnTap(_ sender: UIButton) {

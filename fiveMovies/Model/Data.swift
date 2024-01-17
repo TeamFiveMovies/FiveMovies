@@ -197,10 +197,51 @@ extension MovieData {
     
 }
 
-//MARK: 좌석 데이터
-class seatData {
+//MARK: 유저 데이터
+class UserData {
     
-    static let shared = seatData()
+    static let shared = UserData()
+    private init () {}
+    
+    public struct User: Codable {
+        var id: String
+        var password: String
+        var passwordCheck: String
+        var birth: String
+    }
+    
+    public var userList: [User] = []
+    
+    //UserDefaults 키
+    private let userKey = "user"
+    
+    //UserDefaults 저장, 불러오기 메서드
+    public func saveUserList() {
+        do {
+            let userData = try JSONEncoder().encode(userList)
+            UserDefaults.standard.set(userData, forKey: userKey)
+            print ("유저 데이터 세이브 성공")
+        } catch {
+            print ("유저 데이터 세이브 실패")
+        }
+    }
+    
+    public func loadUserList() {
+        do {
+            if let userData = UserDefaults.standard.data(forKey: userKey) {
+                userList = try JSONDecoder().decode([User].self, from: userData)
+                print ("유저 데이터 로드 성공")
+            }
+        } catch {
+            print ("유저 데이터 로드 실패")
+        }
+    }
+}
+
+//MARK: 좌석 데이터
+class SeatData {
+    
+    static let shared = SeatData()
     private init () {}
     
     public struct Seat: Codable {
@@ -214,7 +255,6 @@ class seatData {
     private let seatKey = "seat"
     
     //UserDefaults 저장, 불러오기 메서드
-    
     public func saveSeats() {
         do {
             let seatData = try JSONEncoder().encode(seats)

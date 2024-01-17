@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 class MovieData{
     
@@ -40,23 +39,31 @@ class MovieData{
     
     public func setData() {
         getNowPlayingMovies()
-//        getUpCommingMovies()
-//        getPopularMovies()
+        getUpCommingMovies()
+        getPopularMovies()
     }
 }
 
 extension MovieData {
     
     private func getNowPlayingMovies () {
+        
+        //파일 형식과 API키를 정의한 헤더부
         let headers = [
             "accept": "application/json",
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmM2Q1ZTNlYWY2MGViNWY3Njg5YjhjMjIxNTYyMzlhNCIsInN1YiI6IjY1YTUwZDgwMWZiOTRmMDBjMDc0YTFhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4pi9VmylhkY94DoJk6s4Ol7txHjXcyonKy3PeI9ZdS8"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+        //요청을 보낼 URL
+        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1")!
+        
+        //URL에 요청
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        
+        //HTTP 메서드 설정
         request.httpMethod = "GET"
+        
+        //요청에 헤더부 추가
         request.allHTTPHeaderFields = headers
         
         let session = URLSession.shared
@@ -78,7 +85,7 @@ extension MovieData {
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(Result.self, from: data)
-                self.nowPlayingMovies = result.results
+                self.upCommingMovies = result.results
                 print ("현재상영작 데이터 세팅 완료")
             } catch {
                 print("Error parsing JSON: \(error)")
@@ -87,4 +94,103 @@ extension MovieData {
         })
         dataTask.resume()
     }
+    
+    private func getUpCommingMovies () {
+        
+        //파일 형식과 API키를 정의한 헤더부
+        let headers = [
+            "accept": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmM2Q1ZTNlYWY2MGViNWY3Njg5YjhjMjIxNTYyMzlhNCIsInN1YiI6IjY1YTUwZDgwMWZiOTRmMDBjMDc0YTFhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4pi9VmylhkY94DoJk6s4Ol7txHjXcyonKy3PeI9ZdS8"
+        ]
+        
+        //요청을 보낼 URL
+        let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?language=ko-KR&page=1")!
+        
+        //URL에 요청
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        
+        //HTTP 메서드 설정
+        request.httpMethod = "GET"
+        
+        //요청에 헤더부 추가
+        request.allHTTPHeaderFields = headers
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
+            
+            //에러 처리
+            if let error = error {
+                print("Error fetching data: \(error)")
+                return
+            }
+            
+            //데이터 옵셔널 바인딩
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            //데이터 처리
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(Result.self, from: data)
+                self.upCommingMovies = result.results
+                print ("상영예정작 데이터 세팅 완료")
+            } catch {
+                print("Error parsing JSON: \(error)")
+            }
+            
+        })
+        dataTask.resume()
+    }
+    
+    private func getPopularMovies () {
+        
+        //파일 형식과 API키를 정의한 헤더부
+        let headers = [
+            "accept": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmM2Q1ZTNlYWY2MGViNWY3Njg5YjhjMjIxNTYyMzlhNCIsInN1YiI6IjY1YTUwZDgwMWZiOTRmMDBjMDc0YTFhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4pi9VmylhkY94DoJk6s4Ol7txHjXcyonKy3PeI9ZdS8"
+        ]
+        
+        //요청을 보낼 URL
+        let url = URL(string: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko-KR&page=1&sort_by=popularity.desc")!
+        
+        //URL에 요청
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        
+        //HTTP 메서드 설정
+        request.httpMethod = "GET"
+        
+        //요청에 헤더부 추가
+        request.allHTTPHeaderFields = headers
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
+            
+            //에러 처리
+            if let error = error {
+                print("Error fetching data: \(error)")
+                return
+            }
+            
+            //데이터 옵셔널 바인딩
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            //데이터 처리
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(Result.self, from: data)
+                self.popularMovies = result.results
+                print ("인기작 데이터 세팅 완료")
+            } catch {
+                print("Error parsing JSON: \(error)")
+            }
+            
+        })
+        dataTask.resume()
+    }
+    
 }

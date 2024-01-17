@@ -17,12 +17,12 @@ class MovieListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        MovieData.shared.setData(complitionHandler: { [weak self] in
-            self?.displayCollectionView = MovieData.shared.nowPlayingMovies
-            DispatchQueue.main.async {
-                self?.movieCollectionView.reloadData()
-            }
-        })
+//        MovieData.shared.setData(complitionHandler: { [weak self] in
+//            self?.displayCollectionView = MovieData.shared.nowPlayingMovies
+//            DispatchQueue.main.async {
+//                self?.movieCollectionView.reloadData()
+//            }
+//        })
         let flowLayout = UICollectionViewFlowLayout()
         movieCollectionView.collectionViewLayout = flowLayout
         movieCollectionView.dataSource = self

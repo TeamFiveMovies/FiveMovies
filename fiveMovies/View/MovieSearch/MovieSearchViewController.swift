@@ -18,14 +18,14 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
     }
     var searchResults: [MovieData.Movie] = []
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text, !searchText.isEmpty {
-            searchResults = MovieData.shared.searchMovies(with: searchText)
-            searchCollectionView.reloadData()
-        }
-        
-        searchBar.resignFirstResponder()
-    }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        if let searchText = searchBar.text, !searchText.isEmpty {
+//            searchResults = MovieData.shared.searchMovies(with: searchText)
+//            searchCollectionView.reloadData()
+//        }
+//        
+//        searchBar.resignFirstResponder()
+//    }
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

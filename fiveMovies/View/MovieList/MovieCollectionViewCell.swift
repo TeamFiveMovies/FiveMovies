@@ -19,6 +19,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         self.movieName.text = _movie.title
         self.movieName.sizeToFit()
+        self.movieImage.contentMode = .scaleToFill
         
         if let posterPath = movie?.posterPath {
             loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)

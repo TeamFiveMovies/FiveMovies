@@ -73,18 +73,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="183" height="168"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EeJ-EJ-v91" userLabel="Movie Image">
-                                                    <rect key="frame" x="0.0" y="-8" width="183" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EeJ-EJ-v91" userLabel="Movie Image">
+                                                    <rect key="frame" x="0.0" y="0.0" width="183" height="139.66666666666666"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMq-Jo-qOR" userLabel="Movie Name">
-                                                    <rect key="frame" x="8" y="128" width="167" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="hMq-Jo-qOR" userLabel="Movie Name">
+                                                    <rect key="frame" x="0.0" y="147.66666666666666" width="183" height="20.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hMq-Jo-qOR" firstAttribute="top" secondItem="EeJ-EJ-v91" secondAttribute="bottom" constant="8" symbolic="YES" id="BRS-Av-fEy"/>
+                                                <constraint firstAttribute="trailing" secondItem="hMq-Jo-qOR" secondAttribute="trailing" id="UzD-oY-0oy"/>
+                                                <constraint firstItem="EeJ-EJ-v91" firstAttribute="leading" secondItem="rCP-PO-D5L" secondAttribute="leading" id="ZVM-Uv-qh2"/>
+                                                <constraint firstItem="hMq-Jo-qOR" firstAttribute="leading" secondItem="rCP-PO-D5L" secondAttribute="leading" id="cKA-lp-HTB"/>
+                                                <constraint firstAttribute="bottom" secondItem="hMq-Jo-qOR" secondAttribute="bottom" id="k2V-Qa-oQb"/>
+                                                <constraint firstItem="EeJ-EJ-v91" firstAttribute="top" secondItem="rCP-PO-D5L" secondAttribute="top" id="wVT-0G-byP"/>
+                                                <constraint firstAttribute="trailing" secondItem="EeJ-EJ-v91" secondAttribute="trailing" id="wdj-LR-5me"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="183" height="168"/>
                                         <connections>
@@ -107,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1372" y="-24"/>
+            <point key="canvasLocation" x="1464.885496183206" y="-226.05633802816902"/>
         </scene>
     </scenes>
     <resources>

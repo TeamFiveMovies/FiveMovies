@@ -43,7 +43,7 @@ class MovieData{
 //MARK: 무비 데이터 세팅을 위한 API 통신
 extension MovieData {
     
-    private func getNowPlayingMovies(completion: @escaping () -> Void) {
+    public func getNowPlayingMovies(completion: @escaping () -> Void) {
         
         //파일 형식과 API키를 정의한 헤더부
         let headers = [
@@ -82,7 +82,7 @@ extension MovieData {
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(Result.self, from: data)
-                self.upCommingMovies = result.results
+                self.nowPlayingMovies = result.results
                 completion()
                 print ("현재상영작 데이터 세팅 완료")
             } catch {
@@ -93,7 +93,7 @@ extension MovieData {
         dataTask.resume()
     }
     
-    private func getUpCommingMovies(completion: @escaping () -> Void) {
+    public func getUpCommingMovies(completion: @escaping () -> Void) {
         
         //파일 형식과 API키를 정의한 헤더부
         let headers = [
@@ -143,7 +143,7 @@ extension MovieData {
         dataTask.resume()
     }
     
-    private func getPopularMovies(completion: @escaping () -> Void) {
+    public func getPopularMovies(completion: @escaping () -> Void) {
         
         //파일 형식과 API키를 정의한 헤더부
         let headers = [

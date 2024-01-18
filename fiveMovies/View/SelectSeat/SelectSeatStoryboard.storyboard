@@ -215,7 +215,7 @@
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="seatTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UIp-N8-BZO"/>
+                                    <action selector="seatTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="LOP-g2-6FT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rM3-To-TuI">
@@ -314,7 +314,7 @@
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="selectPeople:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FZk-bq-p5Q"/>
+                                    <action selector="selectPeople:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="utK-7S-WUb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ki2-3S-lca">
@@ -337,7 +337,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="확인"/>
                                 <connections>
-                                    <action selector="confirmBtnTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="whS-KY-8SH"/>
+                                    <action selector="confirmBtnTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RUX-mW-vO2"/>
                                 </connections>
                             </button>
                         </subviews>

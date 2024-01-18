@@ -16,7 +16,7 @@ class SelectSeatViewController: UIViewController {
         super.viewDidLoad()
 
         // 좌석 데이터 로드
-        SeatData.shared.loadSeats()
+        SeatData.shared.load()
         updateSeatUI()
         displayStoredSeats()
     }
@@ -88,7 +88,7 @@ class SelectSeatViewController: UIViewController {
         print("선택된 자리: \(selectedSeatIndex)")
 
         // 좌석 데이터 저장
-        SeatData.shared.saveSeats()
+        SeatData.shared.save()
 
         self.dismiss(animated: true)
     }

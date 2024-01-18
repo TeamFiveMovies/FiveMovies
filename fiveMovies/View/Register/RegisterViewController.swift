@@ -13,19 +13,22 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerPassword: UITextField!
     @IBOutlet weak var passwordCheck: UITextField!
     @IBOutlet weak var birthDate: UIDatePicker!
-    
+    @IBOutlet weak var warnLabel: UILabel!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserData.shared.loadUserList()
+        UserData.shared.load()
+        
     }
     
     @IBAction func confirmBtnTap(_ sender: UIButton) {
         
         
         //UserDefaults에 회원정보 저장
-        let newUser = UserData.User(id: registerID.text!, password: registerPassword.text!, passwordCheck: passwordCheck.text!, birth: dataFormat(date: birthDate.date))
+        let newUser = UserData.User(id: registerID.text!, password: registerPassword.text!, birth: dataFormat(date: birthDate.date)
+        , logIn: false)
+        
         
         
         if registerChecking(userInfo: newUser){
@@ -33,7 +36,7 @@ class RegisterViewController: UIViewController {
             let addAction = UIAlertAction(title: "가입하기", style: .default){_ in
                 UserData.shared.userList.append(newUser)
                
-                UserData.shared.saveUserList()
+                UserData.shared.save()
 
                 self.dismiss(animated: true)
             }
@@ -58,18 +61,55 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController {
     
     func registerChecking(userInfo: UserData.User) -> Bool {
-        if userInfo.id == "" || userInfo.password == ""
-            || userInfo.password != userInfo.passwordCheck{
+        
+        if registerID.text == "" || registerPassword.text == ""
+            || passwordCheck.text == ""{
+            warnLabel.text = "빈칸을 확인해주세요"
             return false
         }
         
-        for i in UserData.shared.userList {
-            if i.id == userInfo.id {
-                print("\(i)")
-                return false
-            }
+        if isValidID(id: userInfo.id){
+            registerID.text = ""
+            registerID.becomeFirstResponder()
+            warnLabel.text = "아이디는 영어,숫자로 12자리 이하로 입력해주세요"
+            return false }
+        
+        if userInfo.password.count <= 8 {
+            registerPassword.text = ""
+            registerPassword.becomeFirstResponder()
+            warnLabel.text = "비밀번호를 8자리 이상으로 입력해주세요"
+            return false
         }
+        
+        if registerPassword.text == passwordCheck.text {
+            registerPassword.text = ""
+            passwordCheck.text = ""
+            registerPassword.becomeFirstResponder()
+            warnLabel.text = "비밀번호가 일치하지 않습니다."
+            return false
+        }
+        
+        
+        
+        
+        for user in UserData.shared.userList {
+            
+            if user.id == userInfo.id { 
+                warnLabel.text = "일치한 아이디가 있습니다. 다시 입력하세요"
+                return false }
+            
+        }
+        
+         
+        
         return true
+    }
+    
+    // 정규식으로 영어,숫자만 들어가는지 체크
+    func isValidID(id: String) -> Bool {
+        let idRegEx = "^[a-zA-Z0-9]{,12}$"
+        let idTest = NSPredicate(format: "SELF MATCHES %@", idRegEx)
+        return idTest.evaluate(with: id)
     }
     
     func dataFormat(date: Date) -> String {

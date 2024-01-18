@@ -19,6 +19,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UserData.shared.load()
+    UserData.shared.userList.append(UserData.User(id: "usertest1234", password: "usertest1234", birth: "\(Data())", logIn: false))
         print("\(UserData.shared.userList)")
         
     }

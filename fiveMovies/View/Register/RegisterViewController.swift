@@ -100,14 +100,12 @@ extension RegisterViewController {
             
         }
         
-         
-        
         return true
     }
     
     // 정규식으로 영어,숫자만 들어가는지 체크
     func isValidID(id: String) -> Bool {
-        let idRegEx = "^[a-zA-Z0-9]{,12}$"
+        let idRegEx = "^[a-zA-Z0-9]{0,12}$"
         let idTest = NSPredicate(format: "SELF MATCHES %@", idRegEx)
         return idTest.evaluate(with: id)
     }

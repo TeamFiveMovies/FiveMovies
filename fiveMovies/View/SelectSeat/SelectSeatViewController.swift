@@ -16,7 +16,7 @@ class SelectSeatViewController: UIViewController {
         super.viewDidLoad()
 
         // 좌석 데이터 로드
-        SeatData.shared.loadSeats()
+        SeatData.shared.load()
         updateSeatUI()
         displayStoredSeats()
     }
@@ -68,15 +68,36 @@ class SelectSeatViewController: UIViewController {
     @IBAction func confirmBtnTap(_ sender: Any) {
         if let selectedPeopleTag = selectedPeople?.tag {
             print("선택된 인원 수: \(selectedPeopleTag)")
+            // 선택된 좌석 인덱스를 변환
+            let convertSeat = selectedSeatIndex.map { convertSeatNum(forIndex: $0) }
+            print("선택된 자리: \(convertSeat)")
+
+            // 선택된 인원 수에 따라 총 금액 계산
+            let selectedPeopleCount = selectedPeopleTag
+            let seatPrice = 14000
+            let totalAmount = selectedPeopleCount * seatPrice
+
+
+            // MovieBookingVC의 peopleInfo label 업데이트
+            if let movieBookingVC = presentingViewController as? MovieBookingViewController {
+                movieBookingVC.peopleInfo.text = "\(selectedPeopleTag)"
+                movieBookingVC.seatInfo.text = "\(convertSeat.joined(separator: ", "))"
+                movieBookingVC.totalAmount = totalAmount
+            }
         }
         print("선택된 자리: \(selectedSeatIndex)")
 
         // 좌석 데이터 저장
-        SeatData.shared.saveSeats()
+        SeatData.shared.save()
 
         self.dismiss(animated: true)
     }
 
+    func convertSeatNum(forIndex index: Int) -> String {
+        let row = ["A", "B", "C", "D"][index / 5]  // 각 행에 5개의 좌석
+        let seatNumber = String(format: "%02d", (index % 5) + 1)
+        return "\(row)\(seatNumber)"
+    }
 
     // 좌석 업데이트
     func updateSeatUI() {

@@ -7,40 +7,59 @@
 
 import UIKit
 
-class MovieSearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
+class MovieSearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchCollectionView: UICollectionView!
+    
+    lazy var filteredMovies: [MovieData.Movie] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        MovieData.shared.getSearchedMovies(userInput: "", completion: { [weak self] in
+            self?.filteredMovies = MovieData.shared.searchedMovies
+            DispatchQueue.main.async {
+                self?.searchCollectionView.reloadData()
+            }
+        })
+        let flowLayout = UICollectionViewFlowLayout()
+        searchCollectionView.collectionViewLayout = flowLayout
+        searchCollectionView.delegate = self
+        searchCollectionView.dataSource = self
+        searchBar.placeholder = "Enter Movie Title"
+        searchBar.delegate = self
+    }
     
     
     @IBAction func backToList(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    var searchResults: [MovieData.Movie] = []
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        if let searchText = searchBar.text, !searchText.isEmpty {
-//            searchResults = MovieData.shared.searchMovies(with: searchText)
-//            searchCollectionView.reloadData()
-//        }
-//        
-//        searchBar.resignFirstResponder()
-//    }
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        searchResults = MovieData.shared.searchMovies(with: searchText)
-        searchCollectionView.reloadData()
+        MovieData.shared.getSearchedMovies(userInput: searchText, completion: { [weak self] in
+            self?.filteredMovies = MovieData.shared.searchedMovies
+            DispatchQueue.main.async {
+                self?.searchCollectionView.reloadData()
+            }
+        })
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchResults.count
+        print(filteredMovies.count)
+        return filteredMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let searchCell: SearchCell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCell
+        let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCell
+        searchCell.setCell(filteredMovies[indexPath.row])
+
         
         return searchCell
     }
@@ -55,16 +74,11 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
         
         self.present(MovieDetailViewController, animated: true)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        searchCollectionView.delegate = self
-        searchCollectionView.dataSource = self
-        searchBar.placeholder = "Enter Movie Title"
-        searchBar.delegate = self
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = (collectionView.bounds.width - 10) / 2
+        let cellHeight = collectionView.bounds.height / 3
+        
+        return CGSize(width: cellWidth, height: cellHeight)
     }
-    
-    
-
-
 }

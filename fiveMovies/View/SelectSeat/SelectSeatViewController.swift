@@ -11,17 +11,13 @@ class SelectSeatViewController: UIViewController {
 
     var selectedPeople: UIButton?
     var selectedSeatIndex: [Int] = []   // 선택된 좌석의 인덱스를 저장하는 배열
-    //var seats: [SeatData.Seat] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // 좌석 데이터 로드
         SeatData.shared.loadSeats()
-        //seats = SeatData.shared.seats
         updateSeatUI()
-
-        // 저장된 좌석 표시
         displayStoredSeats()
     }
 
@@ -77,9 +73,7 @@ class SelectSeatViewController: UIViewController {
         // 좌석 데이터 저장
         SeatData.shared.saveSeats()
 
-        self.dismiss(animated: true) {
-            // let userDefaults = UserDefaults.standard
-        }
+        self.dismiss(animated: true)
     }
 
 
@@ -116,5 +110,4 @@ class SelectSeatViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
-
 

@@ -306,7 +306,7 @@ extension MovieData {
         })
         dataTask.resume()
     }
-    
+
     public func movieToImage(movie: Movie, completion: @escaping (_ image: UIImage) -> Void) {
         let moviePosterPathURLSource = "https://image.tmdb.org/t/p/w500\(movie.posterPath)"
         
@@ -318,6 +318,7 @@ extension MovieData {
                 if let data = data {
                     //다운로드된 데이터로 UIImage 객체 생성
                     if let image = UIImage(data: data) {
+                        print("포스터 통신 완료")
                         completion(image)
                     }
                 }

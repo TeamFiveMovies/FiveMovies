@@ -23,12 +23,17 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //선택된 cell에 해당되는 데이터 가져오기
+        let selectedMovie = displayCollectionView[indexPath.row]
         
         let MovieDetailStoryboard = UIStoryboard(name: "MovieDetailStoryboard", bundle: nil)
         
         guard let MovieDetailViewController = MovieDetailStoryboard.instantiateViewController(identifier: "MovieDetail") as? MovieDetailViewController else {
                     return
                 }
+        //MovieDetailViewController의 movieData 프로퍼티에 인스턴스
+        MovieDetailViewController.movieData = selectedMovie
+        
         MovieDetailViewController.modalPresentationStyle = .automatic
         
         self.present(MovieDetailViewController, animated: true)

@@ -31,6 +31,15 @@ class MovieData{
             case overview
             case posterPath = "poster_path"
         }
+        
+        public init(from decoder: Decoder) throws {
+               let container = try decoder.container(keyedBy: CodingKeys.self)
+               self.title = try container.decode(String.self, forKey: .title)
+               self.overview = try container.decode(String.self, forKey: .overview)
+               
+               // "posterPath"가 null이면 기본값으로 설정
+               self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath) ?? "default_poster_path"
+           }
     }
     
     //영화 데이터 배열

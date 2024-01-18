@@ -68,6 +68,10 @@ class SelectSeatViewController: UIViewController {
     @IBAction func confirmBtnTap(_ sender: Any) {
         if let selectedPeopleTag = selectedPeople?.tag {
             print("선택된 인원 수: \(selectedPeopleTag)")
+            // MovieBookingVC의 peopleInfo label 업데이트
+            if let movieBookingVC = presentingViewController as? MovieBookingViewController {
+                movieBookingVC.peopleInfo.text = "\(selectedPeopleTag)"
+            }
         }
         print("선택된 자리: \(selectedSeatIndex)")
 

@@ -9,10 +9,13 @@ import UIKit
 
 class MovieBookingViewController: UIViewController {
 
+    @IBOutlet weak var peopleInfo: UILabel!
+    @IBOutlet weak var seatInfo: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func checkOutBtnTap(_ sender: UIButton) {

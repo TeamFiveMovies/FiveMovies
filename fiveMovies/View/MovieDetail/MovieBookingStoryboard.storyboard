@@ -123,6 +123,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="amountLabel" destination="Q0g-QA-jjc" id="gCY-mk-92B"/>
                         <outlet property="datePicker" destination="Fn4-t7-h3t" id="eYE-b9-dLf"/>
                         <outlet property="peopleInfo" destination="El0-4J-i6w" id="rtP-x7-Kdk"/>
                         <outlet property="seatInfo" destination="QgG-HB-20H" id="ErF-PX-TKH"/>

@@ -72,11 +72,17 @@ class SelectSeatViewController: UIViewController {
             let convertSeat = selectedSeatIndex.map { convertSeatNum(forIndex: $0) }
             print("선택된 자리: \(convertSeat)")
 
+            // 선택된 인원 수에 따라 총 금액 계산
+            let selectedPeopleCount = selectedPeopleTag
+            let seatPrice = 14000
+            let totalAmount = selectedPeopleCount * seatPrice
+
 
             // MovieBookingVC의 peopleInfo label 업데이트
             if let movieBookingVC = presentingViewController as? MovieBookingViewController {
                 movieBookingVC.peopleInfo.text = "\(selectedPeopleTag)"
                 movieBookingVC.seatInfo.text = "\(convertSeat.joined(separator: ", "))"
+                movieBookingVC.totalAmount = totalAmount
             }
         }
         print("선택된 자리: \(selectedSeatIndex)")

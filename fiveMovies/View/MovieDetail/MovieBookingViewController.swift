@@ -12,7 +12,8 @@ class MovieBookingViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var peopleInfo: UILabel!
     @IBOutlet weak var seatInfo: UILabel!
-    
+    @IBOutlet weak var amountLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,5 +42,13 @@ class MovieBookingViewController: UIViewController {
     @IBAction func cancelBtnTap(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
-    
+
+
+
+    var totalAmount: Int = 0 {
+        didSet {
+            amountLabel.text = "\(totalAmount)원"
+        }
+    }
+
 }

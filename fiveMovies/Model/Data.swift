@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: 무비 데이터
 class MovieData{
@@ -305,11 +306,28 @@ extension MovieData {
         })
         dataTask.resume()
     }
+    
+    public func movieToImage(movie: Movie, completion: @escaping (_ image: UIImage) -> Void) {
+        let moviePosterPathURLSource = "https://image.tmdb.org/t/p/w500\(movie.posterPath)"
+        
+        //URL 주소를 대입하여 URL 객체 생성
+        if let moviePosterPathURL = URL(string: moviePosterPathURLSource){
+            
+            // URLSession을 사용하여 이미지 다운로드
+            URLSession.shared.dataTask(with: moviePosterPathURL) { data, response, error in
+                if let data = data {
+                    //다운로드된 데이터로 UIImage 객체 생성
+                    if let image = UIImage(data: data) {
+                        completion(image)
+                    }
+                }
+            }.resume()
+        }
+    }
 }
 
 //MARK: 데이터 관리
 //제네릭 타입으로 메서드를 구현하여 여러 데이터 타입을 하나의 메서드로 다룰 수 있도록 구현함
-//PropertyWrapper 보다 상대적으로
 
 class Storage {
     

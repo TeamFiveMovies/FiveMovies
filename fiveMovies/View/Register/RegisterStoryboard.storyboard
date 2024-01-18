@@ -17,30 +17,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0O-vo-Tre">
-                                <rect key="frame" x="36" y="206" width="321" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h7q-yH-N8M">
-                                <rect key="frame" x="36" y="290" width="321" height="42"/>
+                                <rect key="frame" x="36" y="271" width="321" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-46-tku">
-                                <rect key="frame" x="36" y="406" width="321" height="42"/>
+                                <rect key="frame" x="36" y="387" width="321" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생년월일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="296-6p-Vfe">
-                                <rect key="frame" x="36" y="475" width="87" height="30"/>
+                                <rect key="frame" x="36" y="456" width="87" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B3G-DA-lPo">
-                                <rect key="frame" x="36" y="348" width="321" height="42"/>
+                                <rect key="frame" x="36" y="329" width="321" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -55,6 +49,18 @@
                             <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="6FQ-qa-WUJ">
                                 <rect key="frame" x="202" y="473" width="155" height="34"/>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFJ-Ug-ETd">
+                                <rect key="frame" x="36" y="255" width="321" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0O-vo-Tre">
+                                <rect key="frame" x="36" y="171" width="321" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -63,6 +69,7 @@
                             <constraint firstItem="h7q-yH-N8M" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="21n-wX-dcy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bd7-eZ-KhC" secondAttribute="trailing" constant="36" id="36R-62-2vi"/>
                             <constraint firstItem="v0O-vo-Tre" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="4sb-JU-aTb"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="LFJ-Ug-ETd" secondAttribute="trailing" constant="36" id="5ib-7h-126"/>
                             <constraint firstItem="296-6p-Vfe" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="6DZ-Oj-ABb"/>
                             <constraint firstItem="296-6p-Vfe" firstAttribute="top" secondItem="3VK-46-tku" secondAttribute="bottom" constant="27" id="7Of-2U-Cb8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="bd7-eZ-KhC" secondAttribute="bottom" constant="209" id="9TX-sE-gIf"/>
@@ -70,15 +77,17 @@
                             <constraint firstItem="3VK-46-tku" firstAttribute="top" secondItem="B3G-DA-lPo" secondAttribute="bottom" constant="16" id="Ifg-l1-AlI"/>
                             <constraint firstItem="bd7-eZ-KhC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="303" id="Qu2-u3-4xX"/>
                             <constraint firstItem="bd7-eZ-KhC" firstAttribute="top" secondItem="6FQ-qa-WUJ" secondAttribute="bottom" constant="50" id="Tlq-HU-RIx"/>
-                            <constraint firstItem="v0O-vo-Tre" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="147" id="Vwo-Jp-8Sn"/>
                             <constraint firstItem="3VK-46-tku" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="YRO-m4-ZSn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="v0O-vo-Tre" secondAttribute="trailing" constant="36" id="ZMu-nO-0go"/>
+                            <constraint firstItem="v0O-vo-Tre" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="112" id="a2b-bO-VON"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="B3G-DA-lPo" secondAttribute="trailing" constant="36" id="eEX-6v-Zjm"/>
                             <constraint firstItem="B3G-DA-lPo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="feP-f0-eMy"/>
+                            <constraint firstItem="LFJ-Ug-ETd" firstAttribute="top" secondItem="v0O-vo-Tre" secondAttribute="bottom" constant="36" id="g8z-ob-iwS"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3VK-46-tku" secondAttribute="trailing" constant="36" id="h5O-HF-GdC"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6FQ-qa-WUJ" secondAttribute="trailing" constant="36" id="hsW-T3-YA4"/>
+                            <constraint firstItem="h7q-yH-N8M" firstAttribute="top" secondItem="LFJ-Ug-ETd" secondAttribute="bottom" constant="16" id="l8w-Ht-61u"/>
                             <constraint firstItem="6FQ-qa-WUJ" firstAttribute="leading" secondItem="296-6p-Vfe" secondAttribute="trailing" constant="79" id="lmw-7Y-7bN"/>
-                            <constraint firstItem="h7q-yH-N8M" firstAttribute="top" secondItem="v0O-vo-Tre" secondAttribute="bottom" constant="36" id="oei-7a-mj2"/>
+                            <constraint firstItem="LFJ-Ug-ETd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="yEV-Lc-AoD"/>
                         </constraints>
                     </view>
                     <connections>
@@ -86,6 +95,7 @@
                         <outlet property="passwordCheck" destination="3VK-46-tku" id="oar-jx-bjS"/>
                         <outlet property="registerID" destination="h7q-yH-N8M" id="z2R-dW-8iO"/>
                         <outlet property="registerPassword" destination="B3G-DA-lPo" id="VrD-sF-Wvm"/>
+                        <outlet property="warnLabel" destination="LFJ-Ug-ETd" id="g2b-dI-pBL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -96,6 +106,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

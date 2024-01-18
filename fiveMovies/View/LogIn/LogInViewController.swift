@@ -11,40 +11,40 @@ class LogInViewController: UIViewController {
     
     @IBOutlet weak var userID: UITextField!
     @IBOutlet weak var userPassword: UITextField!
+    @IBOutlet weak var warnLabel: UILabel!
+    
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserData.shared.load()
+        print("\(UserData.shared.userList)")
         
     }
 
     @IBAction func logInBtnTap(_ sender: UIButton) {
-        LoginChecking()
-        
-        for user in UserData.shared.userList {
-            if user.id == userID.text && user.password == userPassword.text {
-                let alert = UIAlertController(title: "로그인 하시겠습니까?", message: nil, preferredStyle: .alert)
-                let addAction = UIAlertAction(title: "확인", style: .default){_ in
-                    self.playUserDataSend(id: user.id, password: user.password)
-                    
-                    let MovieListStoryboard = UIStoryboard(name: "MovieListStoryboard", bundle: nil)
-                    
-                    guard let MovieListViewController = MovieListStoryboard.instantiateViewController(identifier: "MovieList") as? MovieListViewController else {
-                                return
-                            }
-                    MovieListViewController.modalPresentationStyle = .fullScreen
-                    
-                    self.present(MovieListViewController, animated: true)
-                }
-                
-                let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-                alert.addAction(addAction)
-                alert.addAction(cancelAction)
-                present(alert, animated: true, completion: nil)
-            }
             
+        if BlankChecking() {
+            let alert = UIAlertController(title: "로그인 하시겠습니까?", message: nil, preferredStyle: .alert)
+            let addAction = UIAlertAction(title: "확인", style: .default){_ in
+                    
+                let MovieListStoryboard = UIStoryboard(name: "MovieListStoryboard", bundle: nil)
+                    
+                guard let MovieListViewController = MovieListStoryboard.instantiateViewController(identifier: "MovieList") as? MovieListViewController else {
+                        return
+                }
+                    
+                MovieListViewController.modalPresentationStyle = .fullScreen
+                    
+                self.present(MovieListViewController, animated: true)
+            }
+                
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alert.addAction(addAction)
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
         }
-        
     }
     
     
@@ -62,26 +62,31 @@ class LogInViewController: UIViewController {
 }
 
 extension LogInViewController {
-    func LoginChecking() {
+    func BlankChecking() -> Bool {
         if userID.text == "" {
-            let alert = UIAlertController(title: "아이디를 입력해주세요", message: nil, preferredStyle: .alert)
-            
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alert.addAction(cancelAction)
-            present(alert, animated: true, completion: nil)
+            userID.becomeFirstResponder()
+            warnLabel.text = "아이디를 입력해주세요."
+            return false
         }
         
         if userPassword.text == "" {
-            let alert = UIAlertController(title: "비밀번호를 입력해주세요", message: nil, preferredStyle: .alert)
-            
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alert.addAction(cancelAction)
-            present(alert, animated: true, completion: nil)
+            userPassword.text = ""
+            userPassword.becomeFirstResponder()
+            warnLabel.text = "비밀번호를 입력해주세요."
+            return false
         }
-    }
-    
-    func playUserDataSend(id: String, password: String) {
-        playUserID = id
-        playUserPassword = password
+        
+        for user in UserData.shared.userList {
+            if user.id == userID.text && user.password == userPassword.text{
+                return true
+            }
+        }
+        
+        userID.text = ""
+        userPassword.text = ""
+        userID.becomeFirstResponder()
+        warnLabel.text = "아이디혹 비밀번호를 잘못 입력하셨거나 등록되지 않은 아이디입니다."
+        
+        return false
     }
 }

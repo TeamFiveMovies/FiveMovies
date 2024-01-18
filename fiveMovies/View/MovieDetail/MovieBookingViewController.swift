@@ -9,19 +9,21 @@ import UIKit
 
 class MovieBookingViewController: UIViewController {
 
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var peopleInfo: UILabel!
     @IBOutlet weak var seatInfo: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        SeatData.shared.loadSeats()
     }
     
     @IBAction func checkOutBtnTap(_ sender: UIButton) {
         self.dismiss(animated: true)
         
         //UserDefaults에 예매정보 저장
+        SeatData.shared.saveSeats()
     }
     
     

@@ -40,7 +40,61 @@ class MovieData{
     public var searchedMovies: [Movie] = []
 }
 
-//MARK: 무비 데이터 세팅을 위한 API 통신
+//MARK: 유저 데이터
+class UserData {
+    
+    static let shared = UserData()
+    private init () {}
+    
+    public struct User: Codable {
+        var id: String
+        var password: String
+        var birth: String
+        var logIn: Bool
+    }
+    
+    public var userList: [User] = []
+    
+    //UserDefaults 키
+    private let userKey = "user"
+    
+    public func save() {
+        Storage.shared.saveData(key: userKey, data: userList)
+    }
+    
+    public func load() {
+        self.userList = Storage.shared.loadData(key: userKey, data: userList)
+    }
+}
+
+//MARK: 좌석 데이터
+public class SeatData {
+
+    public static let shared = SeatData()
+    private init () {}
+
+    public struct Seat: Codable {
+        var isAvailable: Bool   // 좌석 사용 가능한지
+        var isSelected: Bool    // 좌석이 선택되었는지
+        var seatNum: Int
+    }
+
+    public var seats: [Seat] = []
+
+    //UserDefaults 키
+    private let seatKey = "seat"
+    
+    //UserDefaults 저장, 불러오기 메서드
+    
+    public func save() {
+        Storage.shared.saveData(key: seatKey, data: seats)
+    }
+    public func load() {
+        seats = Storage.shared.loadData(key: seatKey, data: seats)
+    }
+}
+
+//MARK: API 통신
 extension MovieData {
     
     public func getNowPlayingMovies(completion: @escaping () -> Void) {
@@ -244,85 +298,40 @@ extension MovieData {
     }
 }
 
-//MARK: 유저 데이터
-class UserData {
+//MARK: 데이터 관리
+//제네릭 타입으로 메서드를 구현하여 여러 데이터 타입을 하나의 메서드로 다룰 수 있도록 구현함
+//PropertyWrapper 보다 상대적으로
+
+class Storage {
     
-    static let shared = UserData()
-    private init () {}
+    static let shared = Storage()
+    private init() {}
     
-    public struct User: Codable {
-        var id: String
-        var password: String
-        var passwordCheck: String
-        var birth: String
-    }
-    
-    public var userList: [User] = []
-    
-    //UserDefaults 키
-    private let userKey = "user"
-    
-    //UserDefaults 저장, 불러오기 메서드
-    public func saveUserList() {
+    //쓰기 메서드
+    public func saveData<T: Codable> (key: String, data: T) {
         do {
-            let userData = try JSONEncoder().encode(userList)
-            UserDefaults.standard.set(userData, forKey: userKey)
-            print ("유저 데이터 세이브 성공")
-        } catch {
-            print ("유저 데이터 세이브 실패")
+            let dataJSON = try JSONEncoder().encode(data)
+            UserDefaults.standard.set(dataJSON, forKey: key)
+            print("\(key) 세이브 성공")
+        }
+        catch {
+            print( "\(key) 세이브 실패")
         }
     }
     
-    public func loadUserList() {
+    //읽기 메서드
+    public func loadData<T: Codable> (key: String, data: T) -> T {
         do {
-            if let userData = UserDefaults.standard.data(forKey: userKey) {
-                userList = try JSONDecoder().decode([User].self, from: userData)
-                print ("유저 데이터 로드 성공")
+            if let dataJSON = UserDefaults.standard.data(forKey: key) {
+                print("\(key) 로드 성공")
+                return try JSONDecoder().decode(T.self, from: dataJSON)
             }
-        } catch {
-            print ("유저 데이터 로드 실패")
         }
-    }
-}
-
-//MARK: 좌석 데이터
-public class SeatData {
-
-    public static let shared = SeatData()
-    private init () {}
-
-    public struct Seat: Codable {
-        var isAvailable: Bool   // 좌석 사용 가능한지
-        var isSelected: Bool    // 좌석이 선택되었는지
-        var seatNum: Int
-    }
-
-    public var seats: [Seat] = []
-
-    //UserDefaults 키
-    private let seatKey = "seat"
-
-    //UserDefaults 저장, 불러오기 메서드
-    public func saveSeats() {
-        do {
-            let seatData = try JSONEncoder().encode(seats)
-            UserDefaults.standard.set(seatData, forKey: seatKey)
-            print ("좌석 데이터 세이브 성공")
-        } catch {
-            print ("좌석 데이터 세이브 실패")
+        catch {
+            print("\(key) 로드 실패")
+            return data
         }
-    }
-    public func loadSeats() {
-        do {
-            if let seatData = UserDefaults.standard.data(forKey: seatKey) {
-                seats = try JSONDecoder().decode([Seat].self, from: seatData)
-                print ("좌석 데이터 로드 성공")
-            } else {
-                print("저장된 좌석 데이터가 없습니다.")
-            }
-
-        } catch {
-            print ("좌석 데이터 로드 실패")
-        }
+        print("\(key) 로드 실패")
+        return data
     }
 }

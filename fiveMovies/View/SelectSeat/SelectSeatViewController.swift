@@ -9,15 +9,20 @@ import UIKit
 
 class SelectSeatViewController: UIViewController {
 
-    var seats: [Seat] = []              // 좌석 정보를 담는 Seat 구조체 배열
     var selectedPeople: UIButton?
     var selectedSeatIndex: [Int] = []   // 선택된 좌석의 인덱스를 저장하는 배열
+    var seats: [SeatData.Seat] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        seats = Array(repeating: Seat(isAvailable: true, isSelected: false), count: 20) // 좌석 배열 초기화
+        // 좌석 데이터 로드
+        SeatData.shared.loadSeats()
+        seats = SeatData.shared.seats
         updateSeatUI()
+
+        // 저장된 좌석 표시
+        displayStoredSeats()
     }
 
     // 인원 수
@@ -69,6 +74,10 @@ class SelectSeatViewController: UIViewController {
         }
         print("선택된 자리: \(selectedSeatIndex)")
 
+        // 좌석 데이터 저장
+        SeatData.shared.seats = seats
+        SeatData.shared.saveSeats()
+
         self.dismiss(animated: true) {
             // let userDefaults = UserDefaults.standard
         }
@@ -93,6 +102,14 @@ class SelectSeatViewController: UIViewController {
         updateSeatUI()
         print("deselectAllSeats called")
     }
+
+    func displayStoredSeats() {
+        print("저장된 좌석:")
+        for (index, seat) in seats.enumerated() {
+            print("자리 \(index) - 사용 가능: \(seat.isAvailable), 선택됨: \(seat.isSelected)")
+        }
+    }
+
 
     func showAlert(message: String) {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)

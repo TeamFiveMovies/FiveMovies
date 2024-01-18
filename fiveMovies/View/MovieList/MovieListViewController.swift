@@ -17,12 +17,12 @@ class MovieListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        MovieData.shared.setData(complitionHandler: { [weak self] in
-//            self?.displayCollectionView = MovieData.shared.nowPlayingMovies
-//            DispatchQueue.main.async {
-//                self?.movieCollectionView.reloadData()
-//            }
-//        })
+        MovieData.shared.getNowPlayingMovies(completion: { [weak self] in
+            self?.displayCollectionView = MovieData.shared.nowPlayingMovies
+            DispatchQueue.main.async {
+                self?.movieCollectionView.reloadData()
+            }
+        })
         let flowLayout = UICollectionViewFlowLayout()
         movieCollectionView.collectionViewLayout = flowLayout
         movieCollectionView.dataSource = self
@@ -34,13 +34,28 @@ class MovieListViewController: UIViewController {
     @IBAction func selectionValueChanged(_ sender: Any) {
         switch movieSegmentedControl.selectedSegmentIndex {
         case 1:
-            displayCollectionView = MovieData.shared.upCommingMovies
+            MovieData.shared.getUpCommingMovies(completion: { [weak self] in
+                self?.displayCollectionView = MovieData.shared.upCommingMovies
+                DispatchQueue.main.async {
+                    self?.movieCollectionView.reloadData()
+                }
+            })
             print("Selected segment index: \(String(describing: (sender as AnyObject).selectedSegmentIndex))")
         case 2:
-            displayCollectionView = MovieData.shared.popularMovies
+            MovieData.shared.getPopularMovies(completion: { [weak self] in
+                self?.displayCollectionView = MovieData.shared.popularMovies
+                DispatchQueue.main.async {
+                    self?.movieCollectionView.reloadData()
+                }
+            })
             print("Selected segment index: \(String(describing: (sender as AnyObject).selectedSegmentIndex))")
         default:
-            displayCollectionView = MovieData.shared.nowPlayingMovies
+            MovieData.shared.getNowPlayingMovies(completion: { [weak self] in
+                self?.displayCollectionView = MovieData.shared.nowPlayingMovies
+                DispatchQueue.main.async {
+                    self?.movieCollectionView.reloadData()
+                }
+            })
             print("Selected segment index: \(String(describing: (sender as AnyObject).selectedSegmentIndex))")
         }
         movieCollectionView.reloadData()

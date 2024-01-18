@@ -41,9 +41,10 @@ class SelectSeatViewController: UIViewController {
 
         let seatIndex = sender.tag
         print("Button tapped with tag: \(seatIndex)")
-        let selectedSeat =  SeatData.shared.seats[seatIndex]
+        let seat = SeatData.Seat.init(isAvailable: true, isSelected: false, seatNum: seatIndex)
+        SeatData.shared.seats.append(seat)
 
-        if selectedSeat.isAvailable {
+        if seat.isAvailable {
             SeatData.shared.seats[seatIndex].isSelected.toggle()    // 선택 가능한 좌석 상태 토글
 
             // 선택된 자리 인덱스 업데이트

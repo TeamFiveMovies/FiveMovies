@@ -14,32 +14,26 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordCheck: UITextField!
     @IBOutlet weak var birthDate: UIDatePicker!
     
-    var userModel = UserModel()
-    
-    
-    
-    let userDataKey = "User"
-    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(readUserList())")
+        UserData.shared.loadUserList()
     }
     
     @IBAction func confirmBtnTap(_ sender: UIButton) {
-        var userData = userModel.userDataList
+        
         
         //UserDefaults에 회원정보 저장
-        let newUser = UserModel.UserData(id: registerID.text!, password: registerPassword.text!, passwordCheck: passwordCheck.text!, birth: dataFormat(date: birthDate.date))
+        let newUser = UserData.User(id: registerID.text!, password: registerPassword.text!, passwordCheck: passwordCheck.text!, birth: dataFormat(date: birthDate.date))
         
         
-        if registerChecking(userData: newUser){
+        if registerChecking(userInfo: newUser){
             let alert = UIAlertController(title: "회원가입 가능합니다", message: "설명", preferredStyle: .alert)
             let addAction = UIAlertAction(title: "가입하기", style: .default){_ in
-                userData.append(newUser)
-                print("\(userData)")
-                self.addUserList(userInfo: userData)
+                UserData.shared.userList.append(newUser)
+               
+                UserData.shared.saveUserList()
 
                 self.dismiss(animated: true)
             }
@@ -62,30 +56,15 @@ class RegisterViewController: UIViewController {
 }
 
 extension RegisterViewController {
-    // 유저 정보 추가
-    func addUserList(userInfo: [UserModel.UserData]) {
-        guard let encodedData = try? JSONEncoder().encode(userInfo) else { return }
-        UserDefaults.standard.set(encodedData, forKey: userDataKey)
-    }
     
-    // 전체 유저 정보 조회
-    func readUserList() -> [UserModel.UserData]{
-       guard let userListData = UserDefaults.standard.data(forKey: userDataKey),
-             let decodedData = try? JSONDecoder().decode([UserModel.UserData].self, from: userListData)
-       else {
-           return [] }
-        
-        return decodedData
-    }
-    
-    func registerChecking(userData: UserModel.UserData) -> Bool {
-        if userData.id == "" || userData.password == ""
-            || userData.password != userData.passwordCheck{
+    func registerChecking(userInfo: UserData.User) -> Bool {
+        if userInfo.id == "" || userInfo.password == ""
+            || userInfo.password != userInfo.passwordCheck{
             return false
         }
         
-        for i in readUserList() {
-            if i.id == userData.id {
+        for i in UserData.shared.userList {
+            if i.id == userInfo.id {
                 print("\(i)")
                 return false
             }

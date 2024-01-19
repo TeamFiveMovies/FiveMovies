@@ -9,16 +9,20 @@ import UIKit
 
 class MovieBookingViewController: UIViewController {
 
+    @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var peopleInfo: UILabel!
     @IBOutlet weak var seatInfo: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
+
+    var selectedMovieTitle: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         SeatData.shared.load()
 
+        movieName.text = selectedMovieTitle
         setupDatePicker()
     }
 

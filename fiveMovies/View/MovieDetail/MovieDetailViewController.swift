@@ -34,6 +34,8 @@ class MovieDetailViewController: UIViewController {
         guard let MovieBookingViewController = MovieBookingStoryboard.instantiateViewController(identifier: "MovieBooking") as? MovieBookingViewController else {
                     return
                 }
+
+        MovieBookingViewController.selectedMovieTitle = movieData?.title ?? ""
         MovieBookingViewController.modalPresentationStyle = .fullScreen
         
         self.present(MovieBookingViewController, animated: true)

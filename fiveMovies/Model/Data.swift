@@ -61,6 +61,13 @@ class UserData {
         var password: String
         var birth: String
         var logIn: Bool
+        var bookedList: [BookedMovie]?
+        
+        struct BookedMovie: Codable {
+            var title: String
+            var seat: String
+            var date: String
+        }
     }
     
     public var userList: [User] = []

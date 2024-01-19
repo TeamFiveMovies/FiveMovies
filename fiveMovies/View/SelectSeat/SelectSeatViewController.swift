@@ -18,7 +18,7 @@ class SelectSeatViewController: UIViewController {
         SeatData.shared.initializeSeats()
         SeatData.shared.load()
 
-        updateSeatUI()
+        //updateSeatUI()
         displayStoredSeats()
     }
 
@@ -127,24 +127,34 @@ class SelectSeatViewController: UIViewController {
 
     // 좌석 업데이트
     func updateSeatUI() {
+        guard let selectedPeopleTag = selectedPeople?.tag else {
+            return
+        }
+
         for (index, seat) in SeatData.shared.seats.enumerated() {
             let seatBtn = view.viewWithTag(index) as? UIButton
-            seatBtn?.isEnabled = false
 
-            // 사용자가 선택한 인원 수에 따라 좌석 버튼 활성화
-            if let selectedPeople = selectedPeople, selectedPeople.isSelected {
-                seatBtn?.isEnabled = true
+            if selectedPeopleTag == 1 {
+                // 한 명일 때 한 좌석만 선택 가능
+                seatBtn?.isEnabled = seat.isSelected || (selectedSeatIndex.isEmpty && seat.isAvailable)
+            } else if selectedPeopleTag == 2 {
+                seatBtn?.isEnabled = seat.isSelected || (selectedSeatIndex.count < 2 && seat.isAvailable)
+            } else {
+
             }
-            print("Seat \(index) - isSelected: \(seat.isSelected)")
+
+            seatBtn?.backgroundColor = seat.isSelected ? UIColor.systemIndigo : (seat.isAvailable ? UIColor.black.withAlphaComponent(0.7) : UIColor.gray)
+            print("Seat \(index) - isSelected: \(seat.isSelected), isEnabled: \(seatBtn?.isEnabled ?? false)")
         }
     }
+
 
     // 모든 좌석 선택 해제
     func deselectAllSeats() {
         for (index, _) in SeatData.shared.seats.enumerated() {
             SeatData.shared.seats[index].isSelected = false
             let seatBtn = view.viewWithTag(index) as? UIButton
-            seatBtn?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            seatBtn?.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         }
         selectedSeatIndex.removeAll()
         updateSeatUI()

@@ -18,7 +18,6 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         UserData.shared.load()
         userID.becomeFirstResponder()
         print("\(UserData.shared.userList)")

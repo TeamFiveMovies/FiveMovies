@@ -12,12 +12,19 @@ class MyPageViewController: UIViewController {
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var userPassword: UILabel!
     @IBOutlet weak var userBirth: UILabel!
-    @IBOutlet weak var myPageTableView: UITableView!
+    @IBOutlet weak var myPageCollectionView: UICollectionView!
+    
+    var testArray: [UserData.User.BookedMovie] = [UserData.User.BookedMovie(title: "영화이름", seat: "좌석", date: "날짜")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserData.shared.load()
         userShow()
-        myPageTableView.delegate = self
-        myPageTableView.dataSource = self
+        
+        myPageCollectionView.delegate = self
+        myPageCollectionView.dataSource = self
+        
     }
     
     
@@ -58,34 +65,44 @@ class MyPageViewController: UIViewController {
         }
     }
 
-    // 로그인한 유저 영화 예매 정보 받기
+    // 로그인한 유저 영화 예매 정보 가져오기
     func userBookedListShow() -> [UserData.User.BookedMovie]{
-        for i in 0 ..<  UserData.shared.userList.count {
-            if UserData.shared.userList[i].logIn{
-                
-                print("\(String(describing: UserData.shared.userList[i].bookedList))")
-                
-                return UserData.shared.userList[i].bookedList ?? []
-            }
+        
+        for i in 0 ..< UserData.shared.userList.count {
+            
         }
+        
+        if var currentUser = UserData.shared.userList.first(where: { $0.logIn }) {
+            print("\(currentUser): 정보")
+            return currentUser.bookedList ?? testArray
+        }
+        
         return []
     }
     
 }
 
-extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+extension MyPageViewController: UICollectionViewDelegate{
+}
+
+extension MyPageViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userBookedListShow().count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "detailsCell", for: indexPath) as? MypageTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell =  myPageCollectionView .dequeueReusableCell(withReuseIdentifier: "InfoCell", for: indexPath) as! MyPageCollectionViewCell
         
-        print("\(userBookedListShow()[indexPath.row])")
-        cell!.setCell(data: userBookedListShow()[indexPath.row])
         
-        return cell!
+        cell.dataSet(data: userBookedListShow()[indexPath.row])
+        
+        return cell
     }
-    
-    
+}
+
+extension MyPageViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: myPageCollectionView.frame.size.width  , height:  myPageCollectionView.frame.height)
+        }
 }

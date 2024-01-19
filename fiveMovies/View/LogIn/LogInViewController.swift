@@ -19,6 +19,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UserData.shared.load()
+        UserData.shared.userList.removeAll()
     UserData.shared.userList.append(UserData.User(id: "usertest1234", password: "usertest1234", birth: "\(Data())", logIn: false))
         print("\(UserData.shared.userList)")
         
@@ -77,16 +78,21 @@ extension LogInViewController {
             return false
         }
         
-        for user in UserData.shared.userList {
-            if user.id == userID.text && user.password == userPassword.text{
+        for i in 0 ..< UserData.shared.userList.count {
+            if UserData.shared.userList[i].id == userID.text && UserData.shared.userList[i].password == userPassword.text{
+                
+                UserData.shared.userList[i].logIn = true
+                
+                
                 return true
             }
+            
         }
         
         userID.text = ""
         userPassword.text = ""
         userID.becomeFirstResponder()
-        warnLabel.text = "아이디혹 비밀번호를 잘못 입력하셨거나 등록되지 않은 아이디입니다."
+        warnLabel.text = "등록되지 않은 계정입니다."
         
         return false
     }

@@ -58,6 +58,8 @@ class RegisterViewController: UIViewController {
     
 }
 
+
+
 extension RegisterViewController {
     
     func registerChecking(userInfo: UserData.User) -> Bool {
@@ -68,20 +70,20 @@ extension RegisterViewController {
             return false
         }
         
-        if isValidID(id: userInfo.id){
+        if isValidID(id: userInfo.id) == false{
             registerID.text = ""
             registerID.becomeFirstResponder()
             warnLabel.text = "아이디는 영어,숫자로 12자리 이하로 입력해주세요"
             return false }
         
-        if userInfo.password.count <= 8 {
+        if userInfo.password.count > 8 {
             registerPassword.text = ""
             registerPassword.becomeFirstResponder()
             warnLabel.text = "비밀번호를 8자리 이상으로 입력해주세요"
             return false
         }
         
-        if registerPassword.text == passwordCheck.text {
+        if registerPassword.text != passwordCheck.text {
             registerPassword.text = ""
             passwordCheck.text = ""
             registerPassword.becomeFirstResponder()
@@ -89,16 +91,17 @@ extension RegisterViewController {
             return false
         }
         
-        
-        
-        
         for user in UserData.shared.userList {
             
             if user.id == userInfo.id { 
+                registerID.text = ""
+                registerID.becomeFirstResponder()
                 warnLabel.text = "일치한 아이디가 있습니다. 다시 입력하세요"
                 return false }
             
         }
+        
+        
         
         return true
     }

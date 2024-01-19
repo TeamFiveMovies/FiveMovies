@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BF259A02B5A3C0100B0C8CE /* MypageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2599F2B5A3C0100B0C8CE /* MypageTableViewCell.swift */; };
 		6B131ACD2B5673CE0074AEAA /* MovieCollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B131ACC2B5673CE0074AEAA /* MovieCollectionViewExtension.swift */; };
 		6B131ACF2B5676750074AEAA /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B131ACE2B5676750074AEAA /* MovieCollectionViewCell.swift */; };
 		6B131AD12B578B3B0074AEAA /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B131AD02B578B3B0074AEAA /* SearchCell.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0BF2599F2B5A3C0100B0C8CE /* MypageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTableViewCell.swift; sourceTree = "<group>"; };
 		6B131ACC2B5673CE0074AEAA /* MovieCollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewExtension.swift; sourceTree = "<group>"; };
 		6B131ACE2B5676750074AEAA /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B131AD02B578B3B0074AEAA /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				E0F465172B560D20001A2DC0 /* MyPageViewController.swift */,
+				0BF2599F2B5A3C0100B0C8CE /* MypageTableViewCell.swift */,
 				E0F465192B560D30001A2DC0 /* MyPageStoryboard.storyboard */,
 			);
 			path = MyPage;
@@ -294,6 +297,7 @@
 				6B131ACF2B5676750074AEAA /* MovieCollectionViewCell.swift in Sources */,
 				6B131AD12B578B3B0074AEAA /* SearchCell.swift in Sources */,
 				E0F465162B560B2C001A2DC0 /* MovieSearchViewController.swift in Sources */,
+				0BF259A02B5A3C0100B0C8CE /* MypageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,9 +27,22 @@ class MovieBookingViewController: UIViewController {
     }
 
     @IBAction func checkOutBtnTap(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "결제 확인", message: "결제를 진행하시겠습니까?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "결제 확인\n", message: "결제를 진행하시겠습니까?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
+            alertController.addAction(cancelAction)
+
+        if let selectedPeopleTag = peopleInfo.text,
+           let selectedSeatInfo = seatInfo.text,
+           let amountText = amountLabel.text {
+            let confirmMessage = """
+                        '\(selectedMovieTitle)'
+                        인원: \(selectedPeopleTag)
+                        좌석: \(selectedSeatInfo)
+                        총 금액: \(amountText)
+                        """
+            alertController.message = confirmMessage
+        }
+
         let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
 
             self.dismiss(animated: true)

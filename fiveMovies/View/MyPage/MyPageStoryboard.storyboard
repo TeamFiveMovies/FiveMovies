@@ -117,6 +117,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="movieDay" destination="mrY-se-cbA" id="Ehk-Am-ar3"/>
                                             <outlet property="movieSeat" destination="wgC-1u-NRh" id="cn6-Bk-jpK"/>
@@ -130,6 +131,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="myPageTableView" destination="PN1-M4-2ve" id="YNk-5m-y1g"/>
                         <outlet property="userBirth" destination="Ux2-mE-lSJ" id="H9M-DA-KUU"/>
                         <outlet property="userID" destination="hN4-B6-fFv" id="cme-06-W29"/>
                         <outlet property="userPassword" destination="RwO-2n-6Ew" id="XeC-8a-zI0"/>

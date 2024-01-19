@@ -12,10 +12,12 @@ class MyPageViewController: UIViewController {
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var userPassword: UILabel!
     @IBOutlet weak var userBirth: UILabel!
-    
+    @IBOutlet weak var myPageTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         userShow()
+        myPageTableView.delegate = self
+        myPageTableView.dataSource = self
     }
     
     
@@ -60,10 +62,10 @@ class MyPageViewController: UIViewController {
     func userBookedListShow() -> [UserData.User.BookedMovie]{
         for i in 0 ..<  UserData.shared.userList.count {
             if UserData.shared.userList[i].logIn{
-                UserData.shared.userList[i].bookedList?.append(UserData.User.BookedMovie(title: "영화1", seat: "좌석1", date: "날짜1"))
-                UserData.shared.userList[i].bookedList?.append(UserData.User.BookedMovie(title: "영화2", seat: "좌석2", date: "날짜2"))
-                UserData.shared.userList[i].bookedList?.append(UserData.User.BookedMovie(title: "영화3", seat: "좌석3", date: "날짜2"))
-                return UserData.shared.userList[i].bookedList!
+                
+                print("\(String(describing: UserData.shared.userList[i].bookedList))")
+                
+                return UserData.shared.userList[i].bookedList ?? []
             }
         }
         return []
@@ -77,11 +79,12 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "detailsCell", for: indexPath) as? MypageTableViewCell else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "detailsCell", for: indexPath) as? MypageTableViewCell
         
-        cell.setCell(data: userBookedListShow()[indexPath.row])
+        print("\(userBookedListShow()[indexPath.row])")
+        cell!.setCell(data: userBookedListShow()[indexPath.row])
         
-        return cell
+        return cell!
     }
     
     

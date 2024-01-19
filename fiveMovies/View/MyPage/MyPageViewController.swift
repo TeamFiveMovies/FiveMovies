@@ -14,7 +14,11 @@ class MyPageViewController: UIViewController {
     @IBOutlet weak var userBirth: UILabel!
     @IBOutlet weak var myPageCollectionView: UICollectionView!
     
-    var testArray: [UserData.User.BookedMovie] = [UserData.User.BookedMovie(title: "영화이름", seat: "좌석", date: "날짜")]
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    var testArray: [UserData.User.BookedMovie] = [UserData.User.BookedMovie(title: "영화이름영화이름영화이름영화이름영화이름", seat: "좌석", date: "날짜")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,14 +73,10 @@ class MyPageViewController: UIViewController {
     func userBookedListShow() -> [UserData.User.BookedMovie]{
         
         for i in 0 ..< UserData.shared.userList.count {
-            
+            if UserData.shared.userList[i].logIn {
+                return UserData.shared.userList[i].bookedList ?? testArray
+            }
         }
-        
-        if var currentUser = UserData.shared.userList.first(where: { $0.logIn }) {
-            print("\(currentUser): 정보")
-            return currentUser.bookedList ?? testArray
-        }
-        
         return []
     }
     

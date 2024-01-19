@@ -25,10 +25,11 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
         })
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 4
-        flowLayout.minimumInteritemSpacing = 4
+        flowLayout.minimumInteritemSpacing = 8
         searchCollectionView.collectionViewLayout = flowLayout
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
+        searchBar.searchBarStyle = .minimal
         searchBar.placeholder = "Enter Movie Title"
         searchBar.delegate = self
     }
@@ -38,7 +39,7 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
         self.dismiss(animated: true, completion: nil)
     }
     
-    
+    //타이핑 시, 문자열을 getSearchedMovies로 키워드를 받는 메서드
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         MovieData.shared.getSearchedMovies(userInput: searchText, completion: { [weak self] in
             self?.filteredMovies = MovieData.shared.searchedMovies
@@ -47,7 +48,7 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
             }
         })
     }
-    
+    //엔터를 누르면 키보드가 내려가는 메서드
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
@@ -84,9 +85,13 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (collectionView.bounds.width - 8) / 2
-        let cellHeight = cellWidth * 1.5
+        let cellWidth = (collectionView.bounds.width - 24) / 2
+        let cellHeight = cellWidth * 1.7
         
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
 }

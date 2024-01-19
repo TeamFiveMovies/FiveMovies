@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -18,9 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TSU-79-sMz">
-                                <rect key="frame" x="0.0" y="103" width="393" height="691"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TSU-79-sMz">
+                                <rect key="frame" x="0.0" y="115" width="393" height="703"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6pN-aC-cVJ">
                                     <size key="itemSize" width="169" height="179"/>
@@ -64,28 +64,49 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nd2-15-VaT">
-                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="rzF-kE-BJ6"/>
-                                </connections>
-                            </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRM-vX-g3s">
-                                <rect key="frame" x="289" y="16" width="88" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="뒤로 가기">
-                                    <color key="baseForegroundColor" systemColor="systemRedColor"/>
-                                </buttonConfiguration>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" role="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="oRM-vX-g3s">
+                                <rect key="frame" x="0.0" y="59" width="37" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="JIV-kK-q31"/>
+                                    <constraint firstAttribute="width" constant="37" id="Mkz-XE-w4e"/>
+                                </constraints>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="image" image="chevron.backward" catalog="system" symbolScale="large"/>
+                                </state>
                                 <connections>
                                     <action selector="backToList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="tlW-CQ-7zf"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" searchBarStyle="prominent" translatesAutoresizingMaskIntoConstraints="NO" id="nd2-15-VaT">
+                                <rect key="frame" x="37" y="59" width="356" height="56"/>
+                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="rzF-kE-BJ6"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nd2-15-VaT" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="5uc-4N-qCr"/>
+                            <constraint firstItem="oRM-vX-g3s" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="DdT-xR-o19"/>
+                            <constraint firstItem="nd2-15-VaT" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="E6C-44-t90"/>
+                            <constraint firstItem="TSU-79-sMz" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="OAT-oX-XhK"/>
+                            <constraint firstItem="TSU-79-sMz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="U2Q-fY-Drm"/>
+                            <constraint firstItem="TSU-79-sMz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="pMt-FP-AbU"/>
+                            <constraint firstItem="nd2-15-VaT" firstAttribute="leading" secondItem="oRM-vX-g3s" secondAttribute="trailing" id="pUI-MT-17e"/>
+                            <constraint firstItem="oRM-vX-g3s" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xMa-59-yuT"/>
+                            <constraint firstItem="TSU-79-sMz" firstAttribute="top" secondItem="nd2-15-VaT" secondAttribute="bottom" id="xYE-4U-RQ5"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="oRM-vX-g3s" id="bl7-SO-7ok"/>
@@ -99,11 +120,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

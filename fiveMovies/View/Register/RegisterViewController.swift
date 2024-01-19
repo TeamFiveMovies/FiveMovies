@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController {
         
         
         if registerChecking(userInfo: newUser){
-            let alert = UIAlertController(title: "회원가입 가능합니다", message: "설명", preferredStyle: .alert)
+            let alert = UIAlertController(title: "회원가입 가능합니다", message: nil, preferredStyle: .alert)
             let addAction = UIAlertAction(title: "가입하기", style: .default){_ in
                 UserData.shared.userList.append(newUser)
                
@@ -46,7 +46,7 @@ class RegisterViewController: UIViewController {
             alert.addAction(cancelAction)
             present(alert, animated: true, completion: nil)
         }else {
-            let alert = UIAlertController(title: "회원가입 형식을 지켜주세요", message: "설명", preferredStyle: .alert)
+            let alert = UIAlertController(title: "회원가입 조건을 지켜주세요", message: nil, preferredStyle: .alert)
 
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
 
@@ -58,6 +58,8 @@ class RegisterViewController: UIViewController {
     
 }
 
+
+
 extension RegisterViewController {
     
     func registerChecking(userInfo: UserData.User) -> Bool {
@@ -68,20 +70,21 @@ extension RegisterViewController {
             return false
         }
         
-        if isValidID(id: userInfo.id){
+        if isValidID(id: userInfo.id) == false{
             registerID.text = ""
             registerID.becomeFirstResponder()
             warnLabel.text = "아이디는 영어,숫자로 12자리 이하로 입력해주세요"
             return false }
         
-        if userInfo.password.count <= 8 {
+        if registerPassword.text!.count < 8 {
             registerPassword.text = ""
+            passwordCheck.text = ""
             registerPassword.becomeFirstResponder()
             warnLabel.text = "비밀번호를 8자리 이상으로 입력해주세요"
             return false
         }
         
-        if registerPassword.text == passwordCheck.text {
+        if registerPassword.text != passwordCheck.text {
             registerPassword.text = ""
             passwordCheck.text = ""
             registerPassword.becomeFirstResponder()
@@ -89,16 +92,17 @@ extension RegisterViewController {
             return false
         }
         
-        
-        
-        
         for user in UserData.shared.userList {
             
             if user.id == userInfo.id { 
+                registerID.text = ""
+                registerID.becomeFirstResponder()
                 warnLabel.text = "일치한 아이디가 있습니다. 다시 입력하세요"
                 return false }
             
         }
+        
+        warnLabel.text = ""
         
         return true
     }

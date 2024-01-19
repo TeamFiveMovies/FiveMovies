@@ -89,6 +89,7 @@
                     <connections>
                         <outlet property="userBirth" destination="Ux2-mE-lSJ" id="H9M-DA-KUU"/>
                         <outlet property="userID" destination="hN4-B6-fFv" id="cme-06-W29"/>
+                        <outlet property="userPassword" destination="RwO-2n-6Ew" id="XeC-8a-zI0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

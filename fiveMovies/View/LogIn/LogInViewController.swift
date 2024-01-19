@@ -24,8 +24,9 @@ class LogInViewController: UIViewController {
         print("\(UserData.shared.userList)")
     }
 
+    //MARK: 로그인 버튼
     @IBAction func logInBtnTap(_ sender: UIButton) {
-            
+        
         if BlankChecking() {
             let alert = UIAlertController(title: "로그인 하시겠습니까?", message: nil, preferredStyle: .alert)
             let addAction = UIAlertAction(title: "확인", style: .default){_ in
@@ -49,7 +50,7 @@ class LogInViewController: UIViewController {
     }
     
     
-    
+    //MARK: 회원가입 버튼
     @IBAction func registerBtnTap(_ sender: UIButton) {
         let RegisterStoryboard = UIStoryboard(name: "RegisterStoryboard", bundle: nil)
         
@@ -69,7 +70,10 @@ class LogInViewController: UIViewController {
     
 }
 
+
 extension LogInViewController {
+    
+    //MARK: 빈칸 체크
     func BlankChecking() -> Bool {
         if userID.text == "" {
             userID.becomeFirstResponder()
@@ -84,6 +88,12 @@ extension LogInViewController {
             return false
         }
         
+        return UserPalying()
+        
+    }
+    
+    //MARK: 아이디 중복 확인
+    func UserPalying() -> Bool{
         for i in 0 ..< UserData.shared.userList.count {
             if UserData.shared.userList[i].id == userID.text && UserData.shared.userList[i].password == userPassword.text{
                 
@@ -92,16 +102,15 @@ extension LogInViewController {
                 return true
             }
         }
-        
         userID.text = ""
         userPassword.text = ""
         userID.becomeFirstResponder()
         warnLabel.text = "등록되지 않은 계정입니다."
-        
         return false
     }
 }
 
+//MARK: 키보드 올리고 내리고
 extension LogInViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

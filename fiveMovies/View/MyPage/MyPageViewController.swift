@@ -18,7 +18,7 @@ class MyPageViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    var testArray: [UserData.User.BookedMovie] = [UserData.User.BookedMovie(title: "영화이름영화이름영화이름영화이름영화이름", seat: "좌석", date: "날짜")]
+    var testArray: [UserData.User.BookedMovie] = [UserData.User.BookedMovie(title: "예매한 영화가 없습니다!", seat: "...", date: "...")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class MyPageViewController: UIViewController {
         
     }
     
-    
+    //MARK: 로그아웃 버튼
     @IBAction func userSignOutButton(_ sender: Any) {
         UserSigOut()
 
@@ -45,8 +45,6 @@ class MyPageViewController: UIViewController {
     
     // logIn값 false으로 만들기
     func UserSigOut() {
-        
-            
         for i in 0 ..< UserData.shared.userList.count {
             if UserData.shared.userList[i].logIn{
                 UserData.shared.userList[i].logIn = false
@@ -56,7 +54,7 @@ class MyPageViewController: UIViewController {
         }
     }
     
-    // 유저 정보 띄우기
+    //MARK: 회원정보 출력
     func userShow() {
         for i in 0 ..< UserData.shared.userList.count {
             if UserData.shared.userList[i].logIn {
@@ -67,7 +65,7 @@ class MyPageViewController: UIViewController {
         }
     }
 
-    // 로그인한 유저 영화 예매 정보 가져오기
+    //MARK: 회원 영화 예매 내역 출력
     func userBookedListShow() -> [UserData.User.BookedMovie]{
         
         for i in 0 ..< UserData.shared.userList.count {
@@ -84,7 +82,9 @@ class MyPageViewController: UIViewController {
 extension MyPageViewController: UICollectionViewDelegate{
 }
 
+
 extension MyPageViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userBookedListShow().count
     }
@@ -97,10 +97,4 @@ extension MyPageViewController: UICollectionViewDataSource {
         
         return cell
     }
-}
-
-extension MyPageViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: myPageCollectionView.frame.size.width  , height:  myPageCollectionView.frame.height)
-        }
 }

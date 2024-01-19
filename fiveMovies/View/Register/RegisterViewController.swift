@@ -22,10 +22,9 @@ class RegisterViewController: UIViewController {
         
     }
     
+    //MARK: 회원가입 완료 버튼
     @IBAction func confirmBtnTap(_ sender: UIButton) {
         
-        
-        //UserDefaults에 회원정보 저장
         let newUser = UserData.User(id: registerID.text!, password: registerPassword.text!, birth: dataFormat(date: birthDate.date)
         , logIn: false)
         
@@ -62,7 +61,7 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController {
     
-    
+    //MARK: 회원가입 조건
     func registerChecking(userInfo: UserData.User) -> Bool {
         
         if registerID.text == "" || registerPassword.text == ""
@@ -108,6 +107,7 @@ extension RegisterViewController {
         return true
     }
     
+    
     // 정규식으로 영어,숫자만 들어가는지 체크
     func isValidID(id: String) -> Bool {
         let idRegEx = "^[a-zA-Z0-9]{0,12}$"
@@ -115,7 +115,7 @@ extension RegisterViewController {
         return idTest.evaluate(with: id)
     }
     
-    
+    // 날짜 데이터 String값으로 바꾸기
     func dataFormat(date: Date) -> String {
         let formatter = DateFormatter()
         

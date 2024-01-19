@@ -85,31 +85,41 @@ class MovieBookingViewController: UIViewController {
         self.present(selectSeatViewController, animated: true)
     }
 
-
     // 결제 알림
     func paymentAlert() {
         let alertController = UIAlertController(title: "결제 확인\n", message: "결제를 진행하시겠습니까?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
 
-        if let selectedPeopleTag = peopleInfo.text,
-           let selectedSeatInfo = seatInfo.text,
-           let amountText = amountLabel.text {
-
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-            let dateInfo = dateFormatter.string(from: datePicker.date)
-
-            let confirmMessage = """
-                        '\(selectedMovieTitle)'
-
-                        날짜: \(dateInfo)
-                        인원: \(selectedPeopleTag)
-                        좌석: \(selectedSeatInfo)
-                        총 금액: \(amountText)
-                        """
-            alertController.message = confirmMessage
+        guard let selectedPeopleTag = peopleInfo.text,
+              let selectedSeatInfo = seatInfo.text,
+              let amountText = amountLabel.text else {
+            return
         }
+
+        // 좌석 선택 필요 알림
+        if selectedSeatInfo.contains("-") {
+            let seatSelectionAlert = UIAlertController(title: "좌석 선택 필요", message: "좌석을 선택해주세요.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            seatSelectionAlert.addAction(okAction)
+
+            present(seatSelectionAlert, animated: true, completion: nil)
+            return
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let dateInfo = dateFormatter.string(from: datePicker.date)
+
+        let confirmMessage = """
+                    '\(selectedMovieTitle)'
+
+                    날짜: \(dateInfo)
+                    인원: \(selectedPeopleTag)
+                    좌석: \(selectedSeatInfo)
+                    총 금액: \(amountText)
+                    """
+        alertController.message = confirmMessage
 
         let confirmAction = UIAlertAction(title: "결제하기", style: .default) { _ in
             self.completionAlert()
@@ -118,6 +128,7 @@ class MovieBookingViewController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
     }
+
 
     // 예매 완료 알림
     func completionAlert() {

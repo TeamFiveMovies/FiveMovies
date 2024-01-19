@@ -52,7 +52,10 @@ class SelectSeatViewController: UIViewController {
         handleConfirmBtn()
     }
 
-
+    @IBAction func cancelBtn(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 
     // 좌석 선택 및 해제 로직
     private func handleSeat(at index: Int) {

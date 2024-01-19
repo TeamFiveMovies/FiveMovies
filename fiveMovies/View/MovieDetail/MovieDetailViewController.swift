@@ -11,7 +11,8 @@ class MovieDetailViewController: UIViewController {
 
     @IBOutlet weak var detailName: UILabel!
     @IBOutlet weak var detailMovieImage: UIImageView!
-
+    @IBOutlet weak var detailDescript: UITextView!
+    
     var movieData: MovieData.Movie?
 
     override func viewDidLoad() {
@@ -45,6 +46,7 @@ class MovieDetailViewController: UIViewController {
         self.detailName.text = _movie.title
         self.detailName.sizeToFit()
         self.detailMovieImage.contentMode = .scaleToFill
+        self.detailDescript.text = _movie.overview
 
         if let posterPath = movieData?.posterPath {
             loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)

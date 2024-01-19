@@ -60,6 +60,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="detailDescript" destination="zmF-Lx-fct" id="YPO-f9-FVJ"/>
                         <outlet property="detailMovieImage" destination="dlF-Ye-By9" id="0hu-xO-14c"/>
                         <outlet property="detailName" destination="am6-Tr-clP" id="nW7-oc-ESG"/>
                     </connections>

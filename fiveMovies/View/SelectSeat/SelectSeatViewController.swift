@@ -18,7 +18,7 @@ class SelectSeatViewController: UIViewController {
         SeatData.shared.initializeSeats()
         SeatData.shared.load()
 
-        updateSeatUI()
+        //updateSeatUI()
         displayStoredSeats()
     }
 
@@ -129,12 +129,9 @@ class SelectSeatViewController: UIViewController {
     func updateSeatUI() {
         for (index, seat) in SeatData.shared.seats.enumerated() {
             let seatBtn = view.viewWithTag(index) as? UIButton
-            seatBtn?.isEnabled = false
 
-            // 사용자가 선택한 인원 수에 따라 좌석 버튼 활성화
-            if let selectedPeople = selectedPeople, selectedPeople.isSelected {
-                seatBtn?.isEnabled = true
-            }
+            seatBtn?.isEnabled = selectedPeople?.isSelected ?? false  // 인원 버튼 상태에 따라 좌석 버튼 활성화
+
             print("Seat \(index) - isSelected: \(seat.isSelected)")
         }
     }
@@ -144,7 +141,7 @@ class SelectSeatViewController: UIViewController {
         for (index, _) in SeatData.shared.seats.enumerated() {
             SeatData.shared.seats[index].isSelected = false
             let seatBtn = view.viewWithTag(index) as? UIButton
-            seatBtn?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            seatBtn?.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         }
         selectedSeatIndex.removeAll()
         updateSeatUI()

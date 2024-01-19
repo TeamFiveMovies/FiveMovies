@@ -34,8 +34,15 @@ class MovieBookingViewController: UIViewController {
         if let selectedPeopleTag = peopleInfo.text,
            let selectedSeatInfo = seatInfo.text,
            let amountText = amountLabel.text {
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let dateInfo = dateFormatter.string(from: datePicker.date)
+
             let confirmMessage = """
                         '\(selectedMovieTitle)'
+                        
+                        날짜: \(dateInfo)
                         인원: \(selectedPeopleTag)
                         좌석: \(selectedSeatInfo)
                         총 금액: \(amountText)
@@ -43,7 +50,7 @@ class MovieBookingViewController: UIViewController {
             alertController.message = confirmMessage
         }
 
-        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+        let confirmAction = UIAlertAction(title: "결제하기", style: .default) { _ in
 
             self.dismiss(animated: true)
 

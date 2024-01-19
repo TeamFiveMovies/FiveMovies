@@ -102,6 +102,19 @@ public class SeatData {
     public func load() {
         seats = Storage.shared.loadData(key: seatKey, data: seats)
     }
+
+    // 20개 좌석으로 초기화
+    public func initializeSeats() {
+        let totalSeats = 20
+
+        seats.removeAll()
+        
+        for index in 0..<totalSeats {
+            let seat = Seat(isAvailable: true, isSelected: false, seatNum: index)
+            seats.append(seat)
+        }
+        save()
+    }
 }
 
 //MARK: API 통신

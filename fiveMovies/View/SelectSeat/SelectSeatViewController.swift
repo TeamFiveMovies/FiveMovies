@@ -15,8 +15,9 @@ class SelectSeatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 좌석 데이터 로드
+        SeatData.shared.initializeSeats()
         SeatData.shared.load()
+
         updateSeatUI()
         displayStoredSeats()
     }

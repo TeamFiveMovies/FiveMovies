@@ -134,8 +134,8 @@ class MovieBookingViewController: UIViewController {
     func storeBookingInfo() {
         guard let selectedPeopleTag = peopleInfo.text,
               let selectedSeatInfo = seatInfo.text,
-              let amountText = amountLabel.text,
-              var currentUser = UserData.shared.userList.first(where: { $0.logIn }) else {
+              let amountText = amountLabel.text
+            else {
             return
         }
 
@@ -149,17 +149,18 @@ class MovieBookingViewController: UIViewController {
             date: dateFormatter.string(from: datePicker.date)
         )
 
-        // bookedList가 초기화되어 있는지 확인
-        currentUser.bookedList = currentUser.bookedList ?? []
-
-        currentUser.bookedList?.append(bookedMovie)
-
+        // 해당 사용자에게 예매 정보 추가
+        for i in UserData.shared.userList.indices {
+            if UserData.shared.userList[i].logIn {
+                if UserData.shared.userList[i].bookedList == nil {
+                    UserData.shared.userList[i].bookedList = []
+                }
+                UserData.shared.userList[i].bookedList?.append(bookedMovie)
+                print(UserData.shared.userList[i].bookedList![0])
+            }
+        }
         UserData.shared.save()
 
-        print("현재 사용자 아이디: \(currentUser.id)")
-        currentUser.bookedList?.forEach { bookedMovie in
-            print("영화: \(bookedMovie.title), 좌석: \(bookedMovie.seat), 날짜: \(bookedMovie.date)")
-        }
     }
 
 

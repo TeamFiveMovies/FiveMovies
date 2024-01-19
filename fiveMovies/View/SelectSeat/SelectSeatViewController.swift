@@ -104,7 +104,7 @@ class SelectSeatViewController: UIViewController {
 
         // 선택된 인원 수에 따라 총 금액 계산
         let selectedPeopleCount = selectedPeopleTag
-        let seatPrice = 14000
+        let seatPrice = 7000
         let totalAmount = selectedPeopleCount * seatPrice
 
         if let movieBookingVC = presentingViewController as? MovieBookingViewController {
@@ -131,10 +131,10 @@ class SelectSeatViewController: UIViewController {
             let seatBtn = view.viewWithTag(index) as? UIButton
             seatBtn?.isEnabled = false
 
-//            // 사용자가 선택한 인원 수에 따라 좌석 버튼 활성화
-//                    if let selectedPeople = selectedPeople, selectedPeople.isSelected {
-//                        seatBtn?.isEnabled = true
-//                    }
+            // 사용자가 선택한 인원 수에 따라 좌석 버튼 활성화
+            if let selectedPeople = selectedPeople, selectedPeople.isSelected {
+                seatBtn?.isEnabled = true
+            }
             print("Seat \(index) - isSelected: \(seat.isSelected)")
         }
     }

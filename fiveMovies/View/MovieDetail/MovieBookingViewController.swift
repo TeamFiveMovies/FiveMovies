@@ -27,10 +27,23 @@ class MovieBookingViewController: UIViewController {
     }
 
     @IBAction func checkOutBtnTap(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        let alertController = UIAlertController(title: "결제 확인", message: "결제를 진행하시겠습니까?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
 
-        //UserDefaults에 예매정보 저장
-        SeatData.shared.save()
+            self.dismiss(animated: true)
+
+            // UserDefaults에 예매 정보 저장
+            SeatData.shared.save()
+
+            if let movieDetailViewController = self.navigationController?.viewControllers.first(where: { $0 is MovieDetailViewController }) as? MovieDetailViewController {
+                self.navigationController?.popToViewController(movieDetailViewController, animated: true)
+            }
+        }
+        alertController.addAction(confirmAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 
 

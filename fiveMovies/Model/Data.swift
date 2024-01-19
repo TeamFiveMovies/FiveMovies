@@ -318,6 +318,8 @@ extension MovieData {
                 if let data = data {
                     //다운로드된 데이터로 UIImage 객체 생성
                     if let image = UIImage(data: data) {
+                        let aspectRatio = image.size.width / image.size.height
+                        print("이미지 가로세로 비율: \(aspectRatio)")
                         print("포스터 통신 완료")
                         completion(image)
                     }

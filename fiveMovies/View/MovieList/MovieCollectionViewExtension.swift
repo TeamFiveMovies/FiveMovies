@@ -40,12 +40,13 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (collectionView.bounds.width - 10) / 2
-        let cellHeight = collectionView.bounds.height / 3
-        
+        let cellWidth = (collectionView.bounds.width - 15) / 2
+        let cellHeight = cellWidth * 1.7
+    
         return CGSize(width: cellWidth, height: cellHeight)
     }
     
-    
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
 }

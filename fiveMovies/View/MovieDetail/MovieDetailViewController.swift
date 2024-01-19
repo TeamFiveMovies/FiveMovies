@@ -11,18 +11,17 @@ class MovieDetailViewController: UIViewController {
 
     @IBOutlet weak var detailMovieImage: UIImageView!
 
-
     var movieData: MovieData.Movie?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.detailMovieImage.contentMode = .scaleToFill
 
+        if let posterPath = movieData?.posterPath {
+            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
+        }
     }
-
-
-
-
 
     @IBAction func cancelBtn(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -39,5 +38,36 @@ class MovieDetailViewController: UIViewController {
         
         self.present(MovieBookingViewController, animated: true)
     }
-    
+
+
+//    func callMovieData(_ _movie: MovieData.Movie) {
+//        movieData = _movie
+//
+//        //self.movieName.text = _movie.title
+//        //self.movieName.sizeToFit()
+//        self.detailMovieImage.contentMode = .scaleToFill
+//
+//        if let posterPath = movieData?.posterPath {
+//            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
+//        }
+//    }
+
+    private func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let data = data, error == nil else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self?.detailMovieImage.image = UIImage(data: data)
+            }
+        }
+
+        task.resume()
+    }
+
 }

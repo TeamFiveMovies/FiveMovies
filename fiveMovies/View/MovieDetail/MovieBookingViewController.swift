@@ -26,15 +26,17 @@ class MovieBookingViewController: UIViewController {
         setupDatePicker()
     }
 
-    @IBAction func checkOutBtnTap(_ sender: UIButton) {
-        paymentAlert()
-    }
-
-
+    // 좌석 선택
     @IBAction func selectSeatBtnTap(_ sender: UIButton) {
         selectSeat()
     }
 
+    // 결제
+    @IBAction func checkOutBtnTap(_ sender: UIButton) {
+        paymentAlert()
+    }
+
+    // 취소
     @IBAction func cancelBtnTap(_ sender: UIButton) {
         self.dismiss(animated: true)
     }

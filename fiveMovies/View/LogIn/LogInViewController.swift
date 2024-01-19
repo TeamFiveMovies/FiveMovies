@@ -19,6 +19,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UserData.shared.load()
+        userLoginReset()
         userID.becomeFirstResponder()
         print("\(UserData.shared.userList)")
     }
@@ -59,6 +60,13 @@ class LogInViewController: UIViewController {
         
         self.present(RegisterViewController, animated: true)
     }
+    
+    func userLoginReset() {
+        for i in 0 ..< UserData.shared.userList.count {
+            UserData.shared.userList[i].logIn = false
+        }
+    }
+    
 }
 
 extension LogInViewController {
@@ -93,5 +101,17 @@ extension LogInViewController {
         warnLabel.text = "등록되지 않은 계정입니다."
         
         return false
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == self.userID {
+            self.userPassword.becomeFirstResponder()
+        } else if textField == self.userPassword {
+            
+        }
+        return true
     }
 }

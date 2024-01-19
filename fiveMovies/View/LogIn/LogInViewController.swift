@@ -89,10 +89,8 @@ extension LogInViewController {
                 
                 UserData.shared.userList[i].logIn = true
                 
-                
                 return true
             }
-            
         }
         
         userID.text = ""

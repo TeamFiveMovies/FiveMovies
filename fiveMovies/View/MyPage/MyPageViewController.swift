@@ -49,6 +49,7 @@ class MyPageViewController: UIViewController {
                 userID.text = user.id
                 userPassword.text = user.password
                 userBirth.text = user.birth
+                print("\(user) 로그아웃")
             }
         }
     }

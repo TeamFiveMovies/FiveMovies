@@ -18,11 +18,10 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserData.shared.load()
-        UserData.shared.userList.removeAll()
-    UserData.shared.userList.append(UserData.User(id: "usertest1234", password: "usertest1234", birth: "\(Data())", logIn: false))
-        print("\(UserData.shared.userList)")
         
+        UserData.shared.load()
+        userID.becomeFirstResponder()
+        print("\(UserData.shared.userList)")
     }
 
     @IBAction func logInBtnTap(_ sender: UIButton) {

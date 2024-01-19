@@ -23,7 +23,6 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserData.shared.load()
         userShow()
         
         myPageCollectionView.delegate = self
@@ -35,23 +34,23 @@ class MyPageViewController: UIViewController {
     @IBAction func userSignOutButton(_ sender: Any) {
         UserSigOut()
 
-        let MainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var presentingViewController = self.presentingViewController
+        while presentingViewController != nil {
         
-        guard let MainViewController = MainStoryboard.instantiateViewController(identifier: "LogIn") as? LogInViewController else {
-                    return
-                }
-        
-        MainViewController.modalPresentationStyle = .fullScreen
-        
-        self.present(MainViewController, animated: true)
+        presentingViewController?.dismiss(animated: true, completion: nil)
+        presentingViewController = presentingViewController?.presentingViewController
+        }
     }
     
     
     // logIn값 false으로 만들기
     func UserSigOut() {
+        
+            
         for i in 0 ..< UserData.shared.userList.count {
             if UserData.shared.userList[i].logIn{
                 UserData.shared.userList[i].logIn = false
+                
                 print("\(UserData.shared.userList[i]) 로그아웃")
             }
         }
@@ -59,12 +58,11 @@ class MyPageViewController: UIViewController {
     
     // 유저 정보 띄우기
     func userShow() {
-        for user in  UserData.shared.userList {
-            if user.logIn{
-                userID.text = user.id
-                userPassword.text = user.password
-                userBirth.text = user.birth
-                print("\(user)")
+        for i in 0 ..< UserData.shared.userList.count {
+            if UserData.shared.userList[i].logIn {
+                userID.text = UserData.shared.userList[i].id
+                userPassword.text = UserData.shared.userList[i].password
+                userBirth.text = UserData.shared.userList[i].birth
             }
         }
     }

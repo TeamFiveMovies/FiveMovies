@@ -62,6 +62,7 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController {
     
+    
     func registerChecking(userInfo: UserData.User) -> Bool {
         
         if registerID.text == "" || registerPassword.text == ""
@@ -113,6 +114,7 @@ extension RegisterViewController {
         let idTest = NSPredicate(format: "SELF MATCHES %@", idRegEx)
         return idTest.evaluate(with: id)
     }
+    
     
     func dataFormat(date: Date) -> String {
         let formatter = DateFormatter()

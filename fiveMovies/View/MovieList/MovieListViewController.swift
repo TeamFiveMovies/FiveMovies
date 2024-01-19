@@ -25,7 +25,7 @@ class MovieListViewController: UIViewController {
         })
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 4
-        flowLayout.minimumInteritemSpacing = 5
+        flowLayout.minimumInteritemSpacing = 8
         movieCollectionView.collectionViewLayout = flowLayout
         movieCollectionView.dataSource = self
         movieCollectionView.delegate = self

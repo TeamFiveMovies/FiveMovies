@@ -19,7 +19,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         self.movieName.text = _movie.title
         self.movieName.sizeToFit()
-        self.movieImage.contentMode = .scaleAspectFill
+        self.movieImage.contentMode = .scaleAspectFit
         
         if (movie?.posterPath) != nil {
             MovieData.shared.movieToImage(movie: _movie, completion: { [weak self] image in

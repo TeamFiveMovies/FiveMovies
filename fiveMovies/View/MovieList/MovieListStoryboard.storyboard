@@ -18,25 +18,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXw-oi-dMG">
-                                <rect key="frame" x="331" y="59" width="50" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOU-aE-hR7">
+                                <rect key="frame" x="282" y="55" width="50" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="person.circle.fill" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
                                 <connections>
-                                    <action selector="myPageBtnTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zcZ-HR-fqy"/>
+                                    <action selector="movieSearchBtnTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dIS-Ao-kfb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FIVE MOVIES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zR-gI-m6q">
-                                <rect key="frame" x="104" y="59" width="185" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIVE MOVIES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zR-gI-m6q">
+                                <rect key="frame" x="104" y="59.000000000000007" width="185" height="26.333333333333336"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mAc-F6-w3H">
-                                <rect key="frame" x="0.0" y="102" width="393" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mAc-F6-w3H">
+                                <rect key="frame" x="0.0" y="93.333333333333329" width="393" height="32"/>
                                 <segments>
                                     <segment title="박스오피스"/>
                                     <segment title="상영 예정"/>
@@ -46,9 +43,8 @@
                                     <action selector="selectionValueChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="161-PL-iQN"/>
                                 </connections>
                             </segmentedControl>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ngg-gd-ysg">
-                                <rect key="frame" x="0.0" y="133" width="393" height="685"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ngg-gd-ysg">
+                                <rect key="frame" x="0.0" y="124.33333333333331" width="393" height="693.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rAe-pl-mMu">
                                     <size key="itemSize" width="183" height="168"/>
@@ -92,18 +88,33 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOU-aE-hR7">
-                                <rect key="frame" x="281" y="59" width="50" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXw-oi-dMG">
+                                <rect key="frame" x="327" y="55" width="50" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="person.circle.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="movieSearchBtnTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dIS-Ao-kfb"/>
+                                    <action selector="myPageBtnTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zcZ-HR-fqy"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2zR-gI-m6q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="104" id="3tB-Tv-NAw"/>
+                            <constraint firstItem="mAc-F6-w3H" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="A29-3h-M5B"/>
+                            <constraint firstItem="mAc-F6-w3H" firstAttribute="top" secondItem="ZOU-aE-hR7" secondAttribute="bottom" constant="3.3333333333333286" id="A8j-b9-Yxp"/>
+                            <constraint firstItem="mAc-F6-w3H" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="CWs-cw-eQw"/>
+                            <constraint firstItem="ngg-gd-ysg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Dfj-8C-Zqk"/>
+                            <constraint firstItem="ZOU-aE-hR7" firstAttribute="leading" secondItem="2zR-gI-m6q" secondAttribute="trailing" constant="-7" id="EW5-00-9WI"/>
+                            <constraint firstItem="mAc-F6-w3H" firstAttribute="top" secondItem="2zR-gI-m6q" secondAttribute="bottom" constant="8" symbolic="YES" id="J1u-su-yUh"/>
+                            <constraint firstItem="mAc-F6-w3H" firstAttribute="top" secondItem="yXw-oi-dMG" secondAttribute="bottom" constant="3.3333333333333286" id="O7s-E3-zgV"/>
+                            <constraint firstItem="ngg-gd-ysg" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="VmK-cU-Pr7"/>
+                            <constraint firstItem="2zR-gI-m6q" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="aNH-p6-M79"/>
+                            <constraint firstItem="yXw-oi-dMG" firstAttribute="leading" secondItem="ZOU-aE-hR7" secondAttribute="trailing" constant="-5" id="hTC-UD-myj"/>
+                            <constraint firstItem="ngg-gd-ysg" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="lgk-Ts-8D1"/>
+                            <constraint firstItem="2zR-gI-m6q" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="tbD-D6-tMa"/>
+                            <constraint firstItem="ngg-gd-ysg" firstAttribute="top" secondItem="mAc-F6-w3H" secondAttribute="bottom" id="yLs-KT-aid"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="28i-2e-YqJ"/>
                     <connections>

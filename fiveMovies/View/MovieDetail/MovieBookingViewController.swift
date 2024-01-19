@@ -27,62 +27,19 @@ class MovieBookingViewController: UIViewController {
     }
 
     @IBAction func checkOutBtnTap(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "결제 확인\n", message: "결제를 진행하시겠습니까?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
-
-        if let selectedPeopleTag = peopleInfo.text,
-           let selectedSeatInfo = seatInfo.text,
-           let amountText = amountLabel.text {
-
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-            let dateInfo = dateFormatter.string(from: datePicker.date)
-
-            let confirmMessage = """
-                        '\(selectedMovieTitle)'
-                        
-                        날짜: \(dateInfo)
-                        인원: \(selectedPeopleTag)
-                        좌석: \(selectedSeatInfo)
-                        총 금액: \(amountText)
-                        """
-            alertController.message = confirmMessage
-        }
-
-        let confirmAction = UIAlertAction(title: "결제하기", style: .default) { _ in
-
-            self.dismiss(animated: true)
-
-            // UserDefaults에 예매 정보 저장
-            SeatData.shared.save()
-
-            if let movieDetailViewController = self.navigationController?.viewControllers.first(where: { $0 is MovieDetailViewController }) as? MovieDetailViewController {
-                self.navigationController?.popToViewController(movieDetailViewController, animated: true)
-            }
-        }
-        alertController.addAction(confirmAction)
-
-        present(alertController, animated: true, completion: nil)
+        paymentAlert()
     }
 
 
     @IBAction func selectSeatBtnTap(_ sender: UIButton) {
-        let SelectSeatStoryboard = UIStoryboard(name: "SelectSeatStoryboard", bundle: nil)
-
-        guard let SelectSeatViewController = SelectSeatStoryboard.instantiateViewController(identifier: "SelectSeat") as? SelectSeatViewController else {
-            return
-        }
-        SelectSeatViewController.modalPresentationStyle = .automatic
-
-        self.present(SelectSeatViewController, animated: true)
+        selectSeat()
     }
 
     @IBAction func cancelBtnTap(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
 
-
+    // 날짜
     func setupDatePicker() {
         let calendar = Calendar.current
         var dateComponents = DateComponents()
@@ -114,4 +71,62 @@ class MovieBookingViewController: UIViewController {
         }
     }
 
+    // 좌석 선택
+    func selectSeat() {
+        let selectSeatStoryboard = UIStoryboard(name: "SelectSeatStoryboard", bundle: nil)
+
+        guard let selectSeatViewController = selectSeatStoryboard.instantiateViewController(identifier: "SelectSeat") as? SelectSeatViewController else {
+            return
+        }
+        selectSeatViewController.modalPresentationStyle = .automatic
+
+        self.present(selectSeatViewController, animated: true)
+    }
+
+
+    // 결제 알림
+    func paymentAlert() {
+        let alertController = UIAlertController(title: "결제 확인\n", message: "결제를 진행하시겠습니까?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        if let selectedPeopleTag = peopleInfo.text,
+           let selectedSeatInfo = seatInfo.text,
+           let amountText = amountLabel.text {
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let dateInfo = dateFormatter.string(from: datePicker.date)
+
+            let confirmMessage = """
+                        '\(selectedMovieTitle)'
+
+                        날짜: \(dateInfo)
+                        인원: \(selectedPeopleTag)
+                        좌석: \(selectedSeatInfo)
+                        총 금액: \(amountText)
+                        """
+            alertController.message = confirmMessage
+        }
+
+        let confirmAction = UIAlertAction(title: "결제하기", style: .default) { _ in
+            self.completionAlert()
+        }
+        alertController.addAction(confirmAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    // 예매 완료 알림
+    func completionAlert() {
+        let completionAlertController = UIAlertController(title: "예매 완료", message: "예매가 완료되었습니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        completionAlertController.addAction(okAction)
+        self.present(completionAlertController, animated: true, completion: nil)
+
+        // UserDefaults에 예매 정보 저장
+        SeatData.shared.save()
+    }
 }

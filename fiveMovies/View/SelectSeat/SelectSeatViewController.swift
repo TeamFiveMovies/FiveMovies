@@ -127,14 +127,27 @@ class SelectSeatViewController: UIViewController {
 
     // 좌석 업데이트
     func updateSeatUI() {
+        guard let selectedPeopleTag = selectedPeople?.tag else {
+            return
+        }
+
         for (index, seat) in SeatData.shared.seats.enumerated() {
             let seatBtn = view.viewWithTag(index) as? UIButton
 
-            seatBtn?.isEnabled = selectedPeople?.isSelected ?? false  // 인원 버튼 상태에 따라 좌석 버튼 활성화
+            if selectedPeopleTag == 1 {
+                // 한 명일 때 한 좌석만 선택 가능
+                seatBtn?.isEnabled = seat.isSelected || (selectedSeatIndex.isEmpty && seat.isAvailable)
+            } else if selectedPeopleTag == 2 {
+                seatBtn?.isEnabled = seat.isSelected || (selectedSeatIndex.count < 2 && seat.isAvailable)
+            } else {
 
-            print("Seat \(index) - isSelected: \(seat.isSelected)")
+            }
+
+            seatBtn?.backgroundColor = seat.isSelected ? UIColor.systemIndigo : (seat.isAvailable ? UIColor.black.withAlphaComponent(0.7) : UIColor.gray)
+            print("Seat \(index) - isSelected: \(seat.isSelected), isEnabled: \(seatBtn?.isEnabled ?? false)")
         }
     }
+
 
     // 모든 좌석 선택 해제
     func deselectAllSeats() {

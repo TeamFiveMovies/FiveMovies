@@ -19,31 +19,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         self.movieName.text = _movie.title
         self.movieName.sizeToFit()
-        self.movieImage.contentMode = .scaleToFill
+        self.movieImage.contentMode = .scaleAspectFill
         
-        if let posterPath = movie?.posterPath {
-            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
+        if (movie?.posterPath) != nil {
+            MovieData.shared.movieToImage(movie: _movie, completion: { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.movieImage.image = image
+                }
+            })
         }
     }
-    
-    private func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else {
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self?.movieImage.image = UIImage(data: data)
-            }
-        }
-        
-        task.resume()
-    }
-    
 }
-    
 

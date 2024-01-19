@@ -24,6 +24,8 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
             }
         })
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 4
+        flowLayout.minimumInteritemSpacing = 4
         searchCollectionView.collectionViewLayout = flowLayout
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
@@ -82,8 +84,8 @@ class MovieSearchViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (collectionView.bounds.width - 10) / 2
-        let cellHeight = collectionView.bounds.height / 3
+        let cellWidth = (collectionView.bounds.width - 8) / 2
+        let cellHeight = cellWidth * 1.5
         
         return CGSize(width: cellWidth, height: cellHeight)
     }

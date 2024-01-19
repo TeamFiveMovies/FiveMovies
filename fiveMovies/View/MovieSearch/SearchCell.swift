@@ -22,28 +22,14 @@ class SearchCell: UICollectionViewCell {
         
         self.searchTitle.text = _movie.title
         self.searchTitle.sizeToFit()
-        self.searchImage.contentMode = .scaleToFill
+        self.searchImage.contentMode = .scaleAspectFit
         
-        if let posterPath = searchMovie?.posterPath {
-            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
+        if (searchMovie?.posterPath) != nil {
+            MovieData.shared.movieToImage(movie: _movie, completion: { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.searchImage.image = image
+                }
+            })
         }
-    }
-    
-    private func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else {
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self?.searchImage.image = UIImage(data: data)
-            }
-        }
-        
-        task.resume()
     }
 }

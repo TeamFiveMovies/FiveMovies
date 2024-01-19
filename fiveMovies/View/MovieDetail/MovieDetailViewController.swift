@@ -9,6 +9,7 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 
+    @IBOutlet weak var detailName: UILabel!
     @IBOutlet weak var detailMovieImage: UIImageView!
 
     var movieData: MovieData.Movie?
@@ -16,10 +17,8 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.detailMovieImage.contentMode = .scaleToFill
-
-        if let posterPath = movieData?.posterPath {
-            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
+        if let movieData = movieData {
+            callMovieData(movieData)
         }
     }
 
@@ -40,17 +39,17 @@ class MovieDetailViewController: UIViewController {
     }
 
 
-//    func callMovieData(_ _movie: MovieData.Movie) {
-//        movieData = _movie
-//
-//        //self.movieName.text = _movie.title
-//        //self.movieName.sizeToFit()
-//        self.detailMovieImage.contentMode = .scaleToFill
-//
-//        if let posterPath = movieData?.posterPath {
-//            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
-//        }
-//    }
+    func callMovieData(_ _movie: MovieData.Movie) {
+        movieData = _movie
+
+        self.detailName.text = _movie.title
+        self.detailName.sizeToFit()
+        self.detailMovieImage.contentMode = .scaleToFill
+
+        if let posterPath = movieData?.posterPath {
+            loadImage(from: "https://image.tmdb.org/t/p/w500" + posterPath)
+        }
+    }
 
     private func loadImage(from urlString: String) {
         guard let url = URL(string: urlString) else {

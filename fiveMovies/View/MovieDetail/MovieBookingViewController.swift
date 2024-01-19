@@ -122,11 +122,44 @@ class MovieBookingViewController: UIViewController {
         alertController.message = confirmMessage
 
         let confirmAction = UIAlertAction(title: "결제하기", style: .default) { _ in
+            self.storeBookingInfo()
             self.completionAlert()
         }
         alertController.addAction(confirmAction)
 
         present(alertController, animated: true, completion: nil)
+    }
+
+    // 예매 정보 저장
+    func storeBookingInfo() {
+        guard let selectedPeopleTag = peopleInfo.text,
+              let selectedSeatInfo = seatInfo.text,
+              let amountText = amountLabel.text,
+              var currentUser = UserData.shared.userList.first(where: { $0.logIn }) else {
+            return
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+
+        // BookedMovie 객체 생성
+        let bookedMovie = UserData.User.BookedMovie(
+            title: selectedMovieTitle,
+            seat: selectedSeatInfo,
+            date: dateFormatter.string(from: datePicker.date)
+        )
+
+        // bookedList가 초기화되어 있는지 확인
+        currentUser.bookedList = currentUser.bookedList ?? []
+
+        currentUser.bookedList?.append(bookedMovie)
+
+        UserData.shared.save()
+
+        print("현재 사용자 아이디: \(currentUser.id)")
+        currentUser.bookedList?.forEach { bookedMovie in
+            print("영화: \(bookedMovie.title), 좌석: \(bookedMovie.seat), 날짜: \(bookedMovie.date)")
+        }
     }
 
 
